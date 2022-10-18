@@ -17,7 +17,7 @@ export default function UsuarioLogin(){
     async function mostraUsuario(){
         const user = await buscaUsuario()
         setUsuario(user)
-        console.log(user)
+        // console.log(user)
     }
 
     // Executa a função anterior
