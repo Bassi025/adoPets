@@ -16,7 +16,7 @@ export default function CentroLogin({route}){
     async function mostraInst(){
         const instituicoes = await buscaInst()
         setInst(instituicoes)
-        console.log(instituicoes)
+        // console.log(instituicoes)
     }
 
     function login(){

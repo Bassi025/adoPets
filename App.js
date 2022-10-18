@@ -9,12 +9,14 @@ import AppLoading from "expo-app-loading";
 
 import { instituicao } from "./src/servicos/Instituicao";
 import { usuario } from "./src/servicos/Usuario";
+import { animais } from "./src/servicos/Animais";
 
 export default function App() {
   
   useEffect(()=>{
     instituicao(),
-    usuario()
+    usuario(),
+    animais()
   }, [])
 
   const [fontsLoaded] = useFonts({
