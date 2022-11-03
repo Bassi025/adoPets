@@ -11,7 +11,9 @@ import {
 
 import { buscaAnimais, buscaAnimal } from '../servicos/Animais';
 
-export default function BuscarAnimais() {
+export default function BuscarAnimais(props) {
+
+  console.log(props);
   const [animais, setAnimais] = useState([{}]);
   const [busca, setBusca] = useState("");
   const [animal, setAnimal] = useState({});
@@ -52,7 +54,7 @@ export default function BuscarAnimais() {
             <Text>Idade: {item.idade}</Text>
             <Text>Pelagem: {item.pelagem}</Text>
             <Text>Porte: {item.porte}</Text>
-          </View>:<View><Text>não há animais cadastrados</Text></View>}
+          </View>:<View><Text>Não há animais cadastrados.</Text></View>}
       </View>
     );
   };

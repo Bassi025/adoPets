@@ -2,28 +2,34 @@ import React, {useState} from "react";
 import {Text, View, TouchableOpacity, StyleSheet, TextInput, Alert} from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
-import { buscaUsuario, usuario } from "../servicos/Usuario";
+
+import { loginUsuario } from '../servicos/Usuario';
 
 export default function UsuarioLogin(){
     
     const navigation = useNavigation();
 
-    const [loginUsuario, setLoginUsuario] = useState('');
-    const [senhaUsuario, setSenhaUsuario] = useState('');
+    const [login, setLogin] = useState('');
+    const [senha, setSenha] = useState('');
 
-    const [usuario, setUsuario] = useState([]);
+    const [usuario, setUsuario] = useState({});
 
     // Busca, salva e mostra
-    async function mostraUsuario(){
-        const user = await buscaUsuario()
-        setUsuario(user)
-        // console.log(user)
-    }
-
-    // Executa a função anterior
-    function login(){
-        mostraUsuario();
-        //navigation.navigate("TelaUsuario");
+    async function logar(){
+        try {
+            const dadosUsuario = {
+                nome: login,
+                cpf: senha
+            }
+            const response = await loginUsuario(dadosUsuario)
+            alert('Logado com sucesso!');
+            setUsuario(response);
+            // console.log(response);
+            navigation.navigate("TelaUsuario", { user: response });
+        } catch (error) {
+            alert('error')
+            console.log(error.message);
+        }
     }
 
     return(
@@ -34,20 +40,20 @@ export default function UsuarioLogin(){
                 <View style = {estilos.boxInput}>
                     <TextInput 
                         style={estilos.textImput}
-                        onChangeText={setLoginUsuario}
-                        value={loginUsuario}
+                        onChangeText={setLogin}
+                        value={login}
                     />
                 </View>
                 <Text style = {estilos.text}>Digite a sua senha:</Text>
                 <View style = {estilos.boxInput}>
                     <TextInput 
                         style={estilos.textImput}
-                        onChangeText={setSenhaUsuario}
-                        value={senhaUsuario}
+                        onChangeText={setSenha}
+                        value={senha}
                     />
                 </View>
                 
-                <TouchableOpacity style={estilos.botao} onPress={()=> login()}>
+                <TouchableOpacity style={estilos.botao} onPress={()=> logar()}>
                     <Text style = {estilos.textButtonLogin}>LOGIN</Text>
                 </TouchableOpacity>
 

@@ -7,7 +7,7 @@ export function animais() {
     })
 }
 
-// Faz o cadastro dos animais
+// Cadastro de animal
 export async function adicionarAnimais(animais) {
     return new Promise((resolve) => {
         db.transaction((transaction) => {

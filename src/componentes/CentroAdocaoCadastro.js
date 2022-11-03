@@ -1,67 +1,68 @@
 import React, { useState } from 'react';
-import {View, Text, TextInput, StyleSheet, Alert, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { adicionarInst } from '../servicos/Instituicao';
 
-export default function CentroAdocaoCadastro(){
+export default function CentroAdocaoCadastro() {
     const navigation = useNavigation();
 
     const [nome, setNome] = useState('');
     const [endereco, setEndereco] = useState('');
     const [cnpj, setCnpj] = useState('');
 
-    async function salvaInst(){
-        const inst = {
+    async function cadastrarInstituicao() {
+        const instituicoes = {
             nome: nome,
             cnpj: cnpj,
             endereco: endereco
         }
-        await adicionarInst(inst)
-        //console.log(inst)
+
+        try {
+            const response = await adicionarInst(instituicoes);
+            alert(response);
+            navigation.navigate("TelaInstituicao");
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    function botao(){
-        salvaInst();
-        navigation.navigate("Instituicao");
-    } 
-
     return (<View style={estilos.Screen}>
-        <View style = {estilos.boxPrincipal}>
-            <Text style = {estilos.textTitulo}>TELA CADASTRO</Text>
-            <Text style = {estilos.text}>Digite o nome da instituição:</Text>
-            <View style = {estilos.boxInput}>
-                <TextInput 
+        <View style={estilos.boxPrincipal}>
+            <Text style={estilos.textTitulo}>TELA CADASTRO</Text>
+            <Text style={estilos.text}>Digite o nome da instituição:</Text>
+            <View style={estilos.boxInput}>
+                <TextInput
                     style={estilos.textImput}
                     onChangeText={setNome}
                     value={nome}
                 />
             </View>
-            <Text style = {estilos.text}>Digite o endereço da instituição:</Text>
-            <View style = {estilos.boxInput}>
-                <TextInput 
+            <Text style={estilos.text}>Digite o endereço da instituição:</Text>
+            <View style={estilos.boxInput}>
+                <TextInput
                     style={estilos.textImput}
                     onChangeText={setEndereco}
                     value={endereco}
                 />
             </View>
-            <Text style = {estilos.text}>Digite o CNPJ da instituição:</Text>
-            <View style = {estilos.boxInput}>
-                <TextInput 
+            <Text style={estilos.text}>Digite o CNPJ da instituição:</Text>
+            <View style={estilos.boxInput}>
+                <TextInput
                     style={estilos.textImput}
                     onChangeText={setCnpj}
                     value={cnpj}
                 />
             </View>
-            <TouchableOpacity style={estilos.botao} onPress={()=> botao()}>
-                <Text style = {estilos.textButton}>CADASTRAR-SE</Text>
+            <TouchableOpacity style={estilos.botao} onPress={() => cadastrarInstituicao()}>
+                <Text style={estilos.textButton}>CADASTRAR-SE</Text>
             </TouchableOpacity>
         </View>
     </View>);
 };
 
 const estilos = StyleSheet.create({
-    Screen:{
+    Screen: {
         flex: 1,
         backgroundColor: '#F58055'
     },
@@ -85,7 +86,7 @@ const estilos = StyleSheet.create({
         width: 277,
         height: 45,
         marginHorizontal: 36,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         borderRadius: 20,
         borderWidth: 3,
         borderColor: '#11E5BF'

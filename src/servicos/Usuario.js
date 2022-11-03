@@ -8,20 +8,38 @@ export function usuario(){
     })
 }
 
-export async function adicionarUsuario(user){
-    return new Promise((resolve)=>{
+// Cadastro de usuario
+export async function adicionarUsuario(usuario){
+    return new Promise((resolve) => {
         db.transaction((transaction) => {
-            transaction.executeSql("INSERT INTO Usuario (nome, endereco, cpf, dataNasci, telefone) VALUES (?,?,?,?,?);", [user.nome, user.endereco, user.cpf, user.dataNasc, user.telefone], () => {
-                resolve("Usuario adicionada com sucesso")
+            transaction.executeSql("INSERT INTO Usuario (nome, endereco, cpf, dataNasc, telefone) VALUES (?,?,?,?,?);", 
+            [usuario.nome, usuario.endereco, usuario.cpf, usuario.dataNasc, usuario.telefone], (err, resultado) => {
+                if (resultado.rowsAffected > 0)
+                    resolve("Usuario adicionado com sucesso!")
             })
         })
     })
 }
 
+// Login de usuario
+export async function loginUsuario(usuario){
+    return new Promise((resolve)=>{
+        db.transaction((transaction) => {
+            transaction.executeSql("SELECT * FROM Usuario WHERE nome = ? AND cpf = ?", 
+            [`${usuario.nome}`, `${usuario.cpf}`], (err, resultado) => {
+                var tamanho = resultado.rows.length;
+                if (tamanho > 0)
+                    resolve(resultado.rows.item(0));
+            })
+        })
+    })
+}
+
+// Buscar todos os usuarios
 export async function buscaUsuario(){
     return new Promise((resolve)=>{
         db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM Usuario;", [], (transaction, resultado) => {
+            transaction.executeSql("SELECT * FROM Usuario", [], (transaction, resultado) => {
                 resolve(resultado.rows._array)
             })
         })
