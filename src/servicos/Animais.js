@@ -3,7 +3,7 @@ import { db } from "./SQLite";
 // Cria a tabela de animais
 export function animais() {
     db.transaction((transaction) => {
-        transaction.executeSql("CREATE TABLE IF NOT EXISTS " + "Animais " + "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, idade TEXT, pelagem TEXT, porte TEXT);");
+        transaction.executeSql("CREATE TABLE IF NOT EXISTS " + "Animais " + "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, idade TEXT, pelagem TEXT, porte TEXT, FOREIGN KEY(id_instituicao) REFERENCES Instituicao(id));");
     })
 }
 
@@ -11,8 +11,8 @@ export function animais() {
 export async function adicionarAnimais(animais) {
     return new Promise((resolve) => {
         db.transaction((transaction) => {
-            transaction.executeSql("INSERT INTO Animais (nome, idade, pelagem, porte) VALUES (?,?,?,?)",
-                [animais.nome, animais.idade, animais.pelagem, animais.porte], (err, resultado) => {
+            transaction.executeSql("INSERT INTO Animais (nome, idade, pelagem, porte, id_instituicao) VALUES (?,?,?,?,?)",
+                [animais.nome, animais.idade, animais.pelagem, animais.porte, animais.id_instituicao], (err, resultado) => {
                     if (resultado.rowsAffected > 0)
                         resolve("Animal adicionado com sucesso!");
                 })

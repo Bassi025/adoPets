@@ -1,15 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Picker
 } from "react-native";
 
 import { adicionarAnimais } from '../servicos/Animais';
+import { buscaInst } from '../servicos/Instituicao';
 
 export default function TelaCadastroAnimais() {
   const navigation = useNavigation();
@@ -19,12 +21,15 @@ export default function TelaCadastroAnimais() {
   const [pelagem, setPelagem] = useState("");
   const [porte, setPorte] = useState("");
 
+  const [instituicao, setIntituicao] = useState([]);
+
   async function cadastrarAnimais() {
     const animais = {
       nome: nome,
       idade: idade,
       pelagem: pelagem,
-      porte: porte
+      porte: porte,
+      instituicao: instituicao
     }
 
     try {
@@ -36,6 +41,27 @@ export default function TelaCadastroAnimais() {
     }
   }
 
+  async function mostrarIntituicoes() {
+    try {
+      const response = await buscaInst();
+      setIntituicao(response);
+      console.log("Intituições: ", response);
+    } catch (error) {
+      alert("Error to request database.");
+      console.log(error);
+    }
+  }
+
+  console.log(mostrarIntituicoes());
+
+  useEffect(() => {
+    mostrarIntituicoes();
+  }, []);
+
+  // let instituicoes = instituicao.map((insti, instiIndex) => {
+  //   console.log(insti.nome);
+  // })
+
   return (
     <ScrollView style={estilos.Screen}>
       <View style={estilos.boxPrincipal}>
@@ -43,7 +69,7 @@ export default function TelaCadastroAnimais() {
         <Text style={estilos.text}>Qual o nome do pet?</Text>
         <View style={estilos.boxInput}>
           <TextInput
-            style={estilos.textImput}
+            style={estilos.textInput}
             onChangeText={setNome}
             value={nome}
           />
@@ -51,7 +77,7 @@ export default function TelaCadastroAnimais() {
         <Text style={estilos.text}>Qual a idade aproximada?</Text>
         <View style={estilos.boxInput}>
           <TextInput
-            style={estilos.textImput}
+            style={estilos.textInput}
             onChangeText={setIdade}
             value={idade}
           />
@@ -59,7 +85,7 @@ export default function TelaCadastroAnimais() {
         <Text style={estilos.text}>Qual a pelagem?</Text>
         <View style={estilos.boxInput}>
           <TextInput
-            style={estilos.textImput}
+            style={estilos.textInput}
             onChangeText={setPelagem}
             value={pelagem}
           />
@@ -67,10 +93,17 @@ export default function TelaCadastroAnimais() {
         <Text style={estilos.text}>Qual o porte do animal?</Text>
         <View style={estilos.boxInput}>
           <TextInput
-            style={estilos.textImput}
+            style={estilos.textInput}
             onChangeText={setPorte}
             value={porte}
           />
+        </View>
+        <View style={estilos.boxInput}>
+          {/* <Picker
+            selectedValue={instituicao}
+            style={estilos.textInput}
+            onValueChange={() => {}}
+          ></Picker> */}
         </View>
         <TouchableOpacity style={estilos.botao} onPress={() => cadastrarAnimais()}>
           <Text style={estilos.textButton}>CADASTRAR</Text>
