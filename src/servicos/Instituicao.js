@@ -8,16 +8,20 @@ export function instituicao(){
     })
 }
 
+// Cadastro de instituição
 export async function adicionarInst(inst){
-    return new Promise((resolve)=>{
+    return new Promise((resolve) => {
         db.transaction((transaction) => {
-            transaction.executeSql("INSERT INTO Instituicao (nome, cnpj, endereco) VALUES (?,?,?);", [inst.nome, inst.cnpj, inst.endereco], () => {
-                resolve("Instituicao adicionada com sucesso")
+            transaction.executeSql("INSERT INTO Instituicao (nome, cnpj, endereco) VALUES (?,?,?);", 
+            [inst.nome, inst.cnpj, inst.endereco], (err, resultado) => {
+                if (resultado.rowsAffected > 0)
+                    resolve("Instituicao adicionada com sucesso!")
             })
         })
     })
 }
 
+// Busca de instituições
 export async function buscaInst(){
     return new Promise((resolve)=>{
         db.transaction((transaction) => {

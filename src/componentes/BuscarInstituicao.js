@@ -1,8 +1,47 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { Link } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
 
-export default function BuscarAnimais() {
+import { buscaInst } from '../servicos/Instituicao';
+
+export default function BuscarInstituicao() {
   const [busca, setBusca] = useState("");
+  const [instituicoes, setIntituicoes] = useState([{}]);
+  const [instituicao, setIntituicao] = useState({});
+
+  async function mostrarInstituicoes() {
+    try {
+      const response = await buscaInst();
+      setIntituicoes(response);
+      console.log("Instituições: ", response);
+    } catch (error) {
+      alert("Error to request database.");
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    mostrarInstituicoes();
+  }, []);
+
+  let listItemView = (item) => {
+    return (
+      <View>
+        {
+          JSON.stringify(item) !== "{}" ?
+            <View key={item.id} style={estilos.containerDados}>
+              <Text>Nome: {item.nome}</Text>
+              <Text>Cnpj: {item.cnpj}</Text>
+              <Text>Endereco: {item.endereco}</Text>
+              <Link to={{ screen: 'BuscarAnimais' }}>
+                Animais desta instituicao
+              </Link>
+            </View> 
+          : <View><Text>Não há instituições cadastradas.</Text></View>
+        }
+      </View>
+    );
+  };
 
   return (
     <View style={estilos.Screen}>
@@ -19,16 +58,12 @@ export default function BuscarAnimais() {
           <Text style={estilos.textButton}>Pesquisar</Text>
         </TouchableOpacity>
         <View style={estilos.boxDados}>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
-          <Text>Teste Busca Instituição</Text>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={instituicoes}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => listItemView(item)}
+            />
         </View>
       </ScrollView>
     </View>

@@ -7,7 +7,9 @@ import dog from "../assets/img/dog5.png";
 
 import { useNavigation } from '@react-navigation/native';
 
-export default function TelaUsuario(){
+export default function TelaUsuario({ route }){
+
+    const { user } = route.params;
 
     const navigation = useNavigation();
  
@@ -18,7 +20,7 @@ export default function TelaUsuario(){
                 <Text style={estilos.textTitulo}>ADOPETS</Text>
                 <Image source={pata} style = {estilos.imgTitulo}/>
             </View>
-            <Text style={estilos.textInst}>USUARIO:</Text>
+            <Text style={estilos.textInst}>USUARIO: {user.nome.toUpperCase()}</Text>
         </View>
         <Text style = {estilos.textOpcao}>SELECIONE UMA OPÇÃO:</Text>
         <View style = {estilos.boxButton}>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {View, Text, TextInput, StyleSheet, Alert, TouchableOpacity, ScrollView} from 'react-native';
-import { adicionarUsuario } from '../servicos/Usuario';
 import { useNavigation } from '@react-navigation/native';
+
+import { adicionarUsuario } from '../servicos/Usuario';
 
 export default function UsuarioCadastro(){
     const navigation = useNavigation();
@@ -12,7 +13,7 @@ export default function UsuarioCadastro(){
     const [dataNasc, setDataNasc] = useState('');
     const [telefone, setTelefone] = useState('');
 
-    async function salvaUsuario(){
+    async function cadastrarUsuario(){
         const usuario = {
             nome: nome,
             endereco: endereco,
@@ -20,14 +21,16 @@ export default function UsuarioCadastro(){
             dataNasc: dataNasc,
             telefone: telefone
         }
-        await adicionarUsuario(usuario)
-        //console.log(usuario)
-    }
 
-    function botao(){
-        salvaUsuario();
-        navigation.navigate("Usuario");
-    } 
+        try {
+            const response = await adicionarUsuario(usuario)
+            alert(response);
+            console.log(usuario)
+            navigation.navigate("Usuario");
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (<ScrollView style={estilos.Screen}>
         <View style = {estilos.boxPrincipal}>
@@ -72,7 +75,7 @@ export default function UsuarioCadastro(){
                     value={telefone}
                 />
             </View>
-            <TouchableOpacity style={estilos.botao} onPress={()=> botao()}>
+            <TouchableOpacity style={estilos.botao} onPress={()=> cadastrarUsuario()}>
                 <Text style = {estilos.textButton}>CADASTRAR-SE</Text>
             </TouchableOpacity>
         </View>
