@@ -31,8 +31,6 @@ export async function buscaAnimais() {
 
                 if (animais.length > 0)
                     resolve(animais)
-                else
-                    resolve("Não há nenhum animal cadastrado.")
             })
         })
     })
