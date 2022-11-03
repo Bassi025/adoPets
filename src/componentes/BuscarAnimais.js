@@ -20,7 +20,7 @@ export default function BuscarAnimais() {
     try {
       const response = await buscaAnimais();
       setAnimais(response);
-      // console.log("Animais: ", response);
+      console.log("Animais: ", response);
     } catch (error) {
       alert("Error to request database.");
       console.log(error);
@@ -43,12 +43,16 @@ export default function BuscarAnimais() {
   }
 
   let listItemView = (item) => {
+    console.log(item);
     return (
-      <View key={item.id} style={estilos.containerDados}>
-        <Text>Nome: {item.nome}</Text>
-        <Text>Idade: {item.idade}</Text>
-        <Text>Pelagem: {item.pelagem}</Text>
-        <Text>Porte: {item.porte}</Text>
+      <View>{
+        JSON.stringify(item) !== "{}" ?
+          <View key={item.id} style={estilos.containerDados}>
+            <Text>Nome: {item.nome}</Text>
+            <Text>Idade: {item.idade}</Text>
+            <Text>Pelagem: {item.pelagem}</Text>
+            <Text>Porte: {item.porte}</Text>
+          </View>:<View><Text>não há animais cadastrados</Text></View>}
       </View>
     );
   };
