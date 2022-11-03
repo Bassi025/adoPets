@@ -21,8 +21,13 @@ export async function adicionarInst(inst){
 export async function buscaInst(){
     return new Promise((resolve)=>{
         db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM Instituicao;", [], (transaction, resultado) => {
-                resolve(resultado.rows._array)
+            transaction.executeSql("SELECT * FROM Instituicao", [], (transaction, resultado) => {
+                var instituicoes = [];
+                for (let i = 0; i < resultado.rows.length; ++i)
+                    instituicoes.push(resultado.rows.item(i));
+
+                if (instituicoes.length > 0)
+                    resolve(instituicoes)
             })
         })
     })

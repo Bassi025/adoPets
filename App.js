@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import {StatusBar, SafeAreaView, View} from 'react-native';
 
 import Telas from "./src/index";
 
@@ -10,13 +9,15 @@ import AppLoading from "expo-app-loading";
 import { instituicao } from "./src/servicos/Instituicao";
 import { usuario } from "./src/servicos/Usuario";
 import { animais } from "./src/servicos/Animais";
+import { adocao } from "./src/servicos/Adocao";
 
 export default function App() {
   
   useEffect(()=>{
     instituicao(),
     usuario(),
-    animais()
+    animais(),
+    adocao()
   }, [])
 
   const [fontsLoaded] = useFonts({

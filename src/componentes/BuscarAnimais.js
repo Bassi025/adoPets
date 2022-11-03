@@ -16,7 +16,7 @@ export default function BuscarAnimais() {
   const [busca, setBusca] = useState("");
   const [animal, setAnimal] = useState({});
 
-  async function mostraAnimais() {
+  async function mostrarAnimais() {
     try {
       const response = await buscaAnimais();
       setAnimais(response);
@@ -28,7 +28,7 @@ export default function BuscarAnimais() {
   }
 
   useEffect(() => {
-    mostraAnimais();
+    mostrarAnimais();
   }, [animal]);
 
   async function buscarAnimal() {
