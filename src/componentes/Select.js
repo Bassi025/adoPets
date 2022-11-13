@@ -5,6 +5,7 @@ import TextError from './TextError';
 
 function Select(props) {
   const { label, name, options, ...rest } = props
+  
   return (
     <View style={styles.boxInput}>
       <label htmlFor={name}>{label}</label>

@@ -18,7 +18,8 @@ import FormikControl from '../componentes/FormikControl';
 export default function UsuarioCadastro() {
     const navigation = useNavigation();
 
-    async function cadastrarUsuario(values) {
+    // Efetuar cadastro do usuário
+    async function cadastrarUsuario(values, resetForm) {
         const { nome, endereco, cpf, dataNasc, telefone } = values;
 
         try {
@@ -32,7 +33,9 @@ export default function UsuarioCadastro() {
 
             const response = await adicionarUsuario(usuario)
             alert(response);
-            // console.log(usuario)
+
+            resetForm({ values: '' })
+
             navigation.navigate("Usuario");
         } catch (error) {
             alert('ERROR: ' + error)
@@ -52,7 +55,7 @@ export default function UsuarioCadastro() {
                         telefone: ''
                     }}
                     validationSchema={validationSchema}
-                    onSubmit={values => cadastrarUsuario(values)}
+                    onSubmit={(values, {resetForm}) => cadastrarUsuario(values, resetForm)}
                 >
                     {({ handleSubmit }) => (
                         <Form>

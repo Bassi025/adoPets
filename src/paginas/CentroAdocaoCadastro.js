@@ -17,7 +17,8 @@ import FormikControl from '../componentes/FormikControl';
 export default function CentroAdocaoCadastro() {
     const navigation = useNavigation();
 
-    async function cadastrarInstituicao(values) {
+    // Efetuar cadastro da instituição
+    async function cadastrarInstituicao(values, resetForm) {
         const { nome, endereco, cnpj } = values;
 
         try {
@@ -29,6 +30,9 @@ export default function CentroAdocaoCadastro() {
 
             const response = await adicionarInstituicao(instituicao);
             alert(response);
+
+            resetForm({ values: '' })
+
             navigation.navigate("Instituicao");
         } catch (error) {
             alert('ERROR: ' + error)
@@ -46,7 +50,7 @@ export default function CentroAdocaoCadastro() {
                         cnpj: ''
                     }}
                     validationSchema={validationSchema}
-                    onSubmit={values => cadastrarInstituicao(values)}
+                    onSubmit={(values, {resetForm}) => cadastrarInstituicao(values, resetForm)}
                 >
                     {({ handleSubmit }) => (
                         <Form>

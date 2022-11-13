@@ -6,6 +6,7 @@ import TextError from './TextError';
 
 function Input(props) {
     const { label, name, ...rest } = props
+    
     return (
         <View style={styles.boxInput}>
             <label htmlFor={name}>{label}</label>

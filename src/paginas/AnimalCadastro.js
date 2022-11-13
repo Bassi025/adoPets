@@ -5,9 +5,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
-  Button,
-  Image
+  ScrollView
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
@@ -26,7 +24,8 @@ export default function AnimalCadastro() {
 
   const [image, setImage] = useState(null);
 
-  const pickImage = async () => {
+  // Pegar imagem
+  const pickerImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -40,8 +39,9 @@ export default function AnimalCadastro() {
       setImage(result.uri);
     }
   };
-
-  async function cadastrarAnimais(values) {
+  
+  // Efetuar cadastro do animal
+  async function cadastrarAnimal(values, resetForm) {
     const { nome, idade, pelagem, porte, instituicao } = values;
 
     try {
@@ -56,17 +56,20 @@ export default function AnimalCadastro() {
 
       const response = await adicionarAnimal(animal);
       alert(response);
+
+      resetForm({ values: '' })
+
       navigation.navigate("TelaInstituicao");
     } catch (error) {
       console.log(error);
     }
   }
 
+  // Buscar instituições
   async function mostrarIntituicoes() {
     try {
       const response = await buscarInstituicoes();
       setIntituicoes(response);
-      // console.log("Intituições: ", response);
     } catch (error) {
       alert("Houve um erro interno no servidor");
       console.log(error);
@@ -87,10 +90,11 @@ export default function AnimalCadastro() {
             idade: '',
             pelagem: '',
             porte: '',
+            imagem: undefined,
             instituicao: undefined,
           }}
           validationSchema={validationSchema}
-          onSubmit={values => cadastrarAnimais(values)}
+          onSubmit={(values, {resetForm}) => cadastrarAnimal(values, resetForm)}
         >
           {({ handleSubmit }) => (
             <Form>
@@ -129,11 +133,13 @@ export default function AnimalCadastro() {
                 name='instituicao'
                 options={instituicoes}
               />
-
-              <View style={estilos.pickImage}>
-                <Button title="Inserir a imagem do animal" onPress={pickImage} />
-                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-              </View>
+              <FormikControl
+                control='image'
+                label=''
+                name='imagem'
+                image={image}
+                fn={pickerImage}
+              />
 
               <TouchableOpacity
                 style={estilos.botao}
@@ -167,6 +173,9 @@ const validationSchema = yup.object().shape({
     .min(4, ({ min }) => `Porte deve ter no minímo ${min} caracteres`)
     .max(50, ({ max }) => `Porte deve ter no minímo ${max} caracteres`)
     .required('O porte é obrigatório'),
+  imagem: yup
+    .mixed()
+    .nullable(),
   instituicao: yup
     .number()
     .required('A instituição é obrigatória')

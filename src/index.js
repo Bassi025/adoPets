@@ -25,7 +25,6 @@ function Telas() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="BuscarAnimais" component={BuscarAnimais} /> */}
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="Usuario" component={Usuario} />
         <Stack.Screen name="Instituicao" component={Instituicao} />
