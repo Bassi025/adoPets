@@ -16,7 +16,7 @@ import TelaLoading from './paginas/TelaLoading';
 import TelaLogout from './paginas/TelaLogout';
 import DeletarAnimais from './paginas/DeletarAnimais';
 import SituacaoAnimais from './paginas/SituacaoAnimais';
-import BuscarAnimais_Usuario from './paginas/BuscarAnimais_Usuario';
+import BuscarAnimaisUsuario from './paginas/BuscarAnimaisUsuario';
 import BuscarInstituicao from './paginas/BuscarInstituicao';
 
 const Stack = createNativeStackNavigator();
@@ -36,7 +36,7 @@ function Telas() {
         <Stack.Screen name='DeletarAnimais' component={DeletarAnimais} />
         <Stack.Screen name='SituacaoAnimais' component={SituacaoAnimais} />
         <Stack.Screen name="TelaUsuario" component={TelaUsuario} />
-        <Stack.Screen name="BuscarAnimais_Usuario" component={BuscarAnimais_Usuario} />
+        <Stack.Screen name="BuscarAnimaisUsuario" component={BuscarAnimaisUsuario} />
         <Stack.Screen name="BuscarInstituicao" component={BuscarInstituicao} />
         <Stack.Screen name="TelaLoading" component={TelaLoading} />
         <Stack.Screen name="TelaLogout" component={TelaLogout} />

@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-  FlatList
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
 
 import { buscarAnimais, buscarAnimal } from '../servicos/Animais';
 
 import AnimalSearch from '../componentes/AnimalSearch';
 
-export default function BuscarAnimais() {
+export default function BuscarAnimaisUsuario() {
+
   const [animal, setAnimal] = useState({});
   const [animais, setAnimais] = useState([{}]);
   const [busca, setBusca] = useState("");
@@ -31,7 +24,7 @@ export default function BuscarAnimais() {
 
   useEffect(() => {
     mostrarAnimais();
-  }, [animal]);
+  }, [animal])
 
   // Buscar animal pelo nome
   async function procurarAnimal() {
@@ -60,11 +53,11 @@ export default function BuscarAnimais() {
   return (
     <View style={estilos.Screen}>
       <ScrollView style={estilos.boxPrincipal}>
-        <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL!</Text>
+        <Text style={estilos.textTitulo}>BUSQUE SEU ANIMAL PREFERIDO!</Text>
         <View style={estilos.boxInput}>
           <TextInput
             style={estilos.textInput}
-            placeholder="Pitoco"
+            placeholder="Pipoca"
             onChangeText={setBusca}
           />
         </View>
