@@ -1,17 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-const AnimalSearch = ({ animal }) => {
+const InstitutionSearch = ({ instituicao }) => {
     return (
-        <TouchableOpacity style={style.card} onPress={() => console.log(animal.id)}>
-            <View style={style.containerImage}>
-                {animal.imagem && <Image source={{ uri: animal.imagem }} style={style.image} />}
-            </View>
+        <TouchableOpacity style={style.card} onPress={() => console.log(instituicao.id)}>
             <View style={style.info}>
-                <Text style={style.name}>Nome: {animal.nome}</Text>
-                <Text style={style.name}>Idade: {animal.idade}</Text>
-                <Text style={style.name}>Pelagem: {animal.pelagem}</Text>
-                <Text style={style.name}>Porte: {animal.porte}</Text>
+                <Text style={style.name}>Nome: {instituicao.nome}</Text>
+                <Text style={style.name}>Endereço: {instituicao.cnpj}</Text>
+                <Text style={style.name}>Cnpj: {instituicao.endereco}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -67,4 +63,4 @@ const style = StyleSheet.create({
     },
 });
 
-export default AnimalSearch
+export default InstitutionSearch

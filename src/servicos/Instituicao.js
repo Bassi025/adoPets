@@ -43,7 +43,20 @@ export async function logarInstituicao(instituicao) {
     })
 }
 
-// Buscar de instituições
+// Buscar uma instituição por nome
+export async function buscarInstituicao(nome) {
+    return new Promise((resolve) => {
+        db.transaction((transaction) => {
+            transaction.executeSql("SELECT * FROM instituicoes where nome LIKE ?", [`${nome}`], (_, resultado) => {
+                var tamanho = resultado.rows.length;
+                if (tamanho > 0)
+                    resolve(resultado.rows.item(0));
+            })
+        })
+    })
+}
+
+// Buscar todas as instituições
 export async function buscarInstituicoes() {
     return new Promise((resolve) => {
         db.transaction((transaction) => {

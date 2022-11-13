@@ -15,16 +15,15 @@ import { buscarAnimais, buscarAnimal } from '../servicos/Animais';
 import AnimalSearch from '../componentes/AnimalSearch';
 
 export default function BuscarAnimais() {
+  const [animal, setAnimal] = useState({});
   const [animais, setAnimais] = useState([{}]);
   const [busca, setBusca] = useState("");
-  const [animal, setAnimal] = useState({});
 
   // Buscar todos os animais
   async function mostrarAnimais() {
     try {
       const response = await buscarAnimais();
       setAnimais(response);
-      console.log("Animais: ", response);
     } catch (error) {
       alert("Error to request database.");
       console.log(error);
@@ -49,14 +48,14 @@ export default function BuscarAnimais() {
 
   let listItemView = (item) => {
     return (
-      <TouchableOpacity style={estilos.cartao} onPress={() => console.log(item.id)}>
+      <View>
         {JSON.stringify(item) !== "{}" ?
           <AnimalSearch animal={item} /> :
           <View>
-            <Text style={estilos.nome}>Não há animais cadastrados.</Text>
+            <Text style={estilos.nome}>Não há instituições cadastradas.</Text>
           </View>
         }
-      </TouchableOpacity>
+      </View>
     );
   };
 
@@ -74,7 +73,7 @@ export default function BuscarAnimais() {
         <TouchableOpacity style={estilos.botao} onPress={() => procurarAnimal()}>
           <Text style={estilos.textButton}>Pesquisar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={estilos.cartao} onPress={() => console.log(animal.id)}>
+        <View style={estilos.boxDados}>
           {JSON.stringify(animal) !== "{}" ?
             <AnimalSearch animal={animal} /> :
             <FlatList
@@ -84,7 +83,7 @@ export default function BuscarAnimais() {
               renderItem={({ item }) => listItemView(item)}
             />
           }
-        </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -174,23 +173,5 @@ const estilos = StyleSheet.create({
     marginHorizontal: 80,
     marginVertical: 10,
     fontFamily: 'Cuprum-Bold',
-  },
-  cartao: {
-    backgroundColor: '#F6F6F6',
-    marginVertical: 8,
-    marginHorizontal: 16,
-    borderRadius: 6,
-
-    // Android
-    elevation: 4,
-
-    // iOS
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      heigth: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-  },
+  }
 });
