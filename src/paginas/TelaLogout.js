@@ -19,7 +19,7 @@ export default function TelaLogout(){
                 <Text style = {estilos.textButton}>NAO</Text>
             </TouchableOpacity>
 
-            <Image source={pata} style = {estilos.imagen}/>
+            <Image source={pata} style = {estilos.imagem}/>
         </View>
     );
 }
@@ -57,7 +57,7 @@ const estilos = StyleSheet.create({
         marginHorizontal: 54,
         fontFamily: 'Cuprum-Bold',
     },
-    imagen: {
+    imagem: {
         width: 200,
         height: 200,
         marginTop: 40,

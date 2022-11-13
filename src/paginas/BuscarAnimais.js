@@ -6,21 +6,23 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  FlatList
+  FlatList,
+  Image
 } from 'react-native';
 
-import { buscaAnimais, buscaAnimal } from '../servicos/Animais';
+import { buscarAnimais, buscarAnimal } from '../servicos/Animais';
 
-export default function BuscarAnimais(props) {
+import AnimalSearch from '../componentes/AnimalSearch';
 
-  console.log(props);
+export default function BuscarAnimais() {
   const [animais, setAnimais] = useState([{}]);
   const [busca, setBusca] = useState("");
   const [animal, setAnimal] = useState({});
 
+  // Buscar todos os animais
   async function mostrarAnimais() {
     try {
-      const response = await buscaAnimais();
+      const response = await buscarAnimais();
       setAnimais(response);
       console.log("Animais: ", response);
     } catch (error) {
@@ -33,9 +35,10 @@ export default function BuscarAnimais(props) {
     mostrarAnimais();
   }, [animal]);
 
-  async function buscarAnimal() {
+  // Buscar animal pelo nome
+  async function procurarAnimal() {
     try {
-      const response = await buscaAnimal(busca);
+      const response = await buscarAnimal(busca);
       // console.log("Animal buscado: ", response);
       setAnimal(response);
     } catch (error) {
@@ -45,17 +48,15 @@ export default function BuscarAnimais(props) {
   }
 
   let listItemView = (item) => {
-    console.log(item);
     return (
-      <View>{
-        JSON.stringify(item) !== "{}" ?
-          <View key={item.id} style={estilos.containerDados}>
-            <Text>Nome: {item.nome}</Text>
-            <Text>Idade: {item.idade}</Text>
-            <Text>Pelagem: {item.pelagem}</Text>
-            <Text>Porte: {item.porte}</Text>
-          </View>:<View><Text>Não há animais cadastrados.</Text></View>}
-      </View>
+      <TouchableOpacity style={estilos.cartao} onPress={() => console.log(item.id)}>
+        {JSON.stringify(item) !== "{}" ?
+          <AnimalSearch animal={item} /> :
+          <View>
+            <Text style={estilos.nome}>Não há animais cadastrados.</Text>
+          </View>
+        }
+      </TouchableOpacity>
     );
   };
 
@@ -65,22 +66,17 @@ export default function BuscarAnimais(props) {
         <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL!</Text>
         <View style={estilos.boxInput}>
           <TextInput
-            style={estilos.textImput}
+            style={estilos.textInput}
+            placeholder="Pitoco"
             onChangeText={setBusca}
           />
         </View>
-        <TouchableOpacity style={estilos.botao} onPress={() => buscarAnimal()}>
+        <TouchableOpacity style={estilos.botao} onPress={() => procurarAnimal()}>
           <Text style={estilos.textButton}>Pesquisar</Text>
         </TouchableOpacity>
-        <View style={estilos.boxDados}>
+        <TouchableOpacity style={estilos.cartao} onPress={() => console.log(animal.id)}>
           {JSON.stringify(animal) !== "{}" ?
-            <View style={estilos.containerDados}>
-              <Text>Nome: {animal.nome}</Text>
-              <Text>Idade: {animal.idade}</Text>
-              <Text>Pelagem: {animal.pelagem}</Text>
-              <Text>Porte: {animal.porte}</Text>
-            </View>
-            :
+            <AnimalSearch animal={animal} /> :
             <FlatList
               showsVerticalScrollIndicator={false}
               data={animais}
@@ -88,7 +84,7 @@ export default function BuscarAnimais(props) {
               renderItem={({ item }) => listItemView(item)}
             />
           }
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -124,6 +120,16 @@ const estilos = StyleSheet.create({
     fontFamily: "Cuprum-Bold",
     color: "black"
   },
+  textInput: {
+    height: 40,
+    width: StyleSheet.inherit,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    border: 'none',
+    // borderColor: 'gray',
+    // borderWidth: StyleSheet.hairlineWidth,
+  },
   boxInput: {
     width: 277,
     height: 45,
@@ -151,10 +157,6 @@ const estilos = StyleSheet.create({
     marginVertical: 40,
     borderRadius: 10
   },
-  containerDados: {
-    flex: 1,
-    margin: 15,
-  },
   botao: {
     width: 250,
     height: 54,
@@ -172,5 +174,23 @@ const estilos = StyleSheet.create({
     marginHorizontal: 80,
     marginVertical: 10,
     fontFamily: 'Cuprum-Bold',
-  }
+  },
+  cartao: {
+    backgroundColor: '#F6F6F6',
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 6,
+
+    // Android
+    elevation: 4,
+
+    // iOS
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      heigth: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+  },
 });

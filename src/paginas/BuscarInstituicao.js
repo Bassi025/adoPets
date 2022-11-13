@@ -2,7 +2,7 @@ import { Link } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
 
-import { buscaInst } from '../servicos/Instituicao';
+import { buscarInstituicoes } from '../servicos/Instituicao';
 
 export default function BuscarInstituicao() {
   const [busca, setBusca] = useState("");
@@ -11,7 +11,7 @@ export default function BuscarInstituicao() {
 
   async function mostrarInstituicoes() {
     try {
-      const response = await buscaInst();
+      const response = await buscarInstituicoes();
       setIntituicoes(response);
       console.log("Instituições: ", response);
     } catch (error) {

@@ -1,8 +1,8 @@
 import * as SQLite from "expo-sqlite";
 
-function abreConecao(){
+function abreConexao(){
     const dataBase = SQLite.openDatabase("adopets");
     return dataBase;
 }
 
-export const db = abreConecao();
+export const db = abreConexao();

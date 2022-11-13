@@ -1,46 +1,45 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 import lupa from "../assets/img/lupa.jpg";
 import pata from "../assets/img/pata.png";
-import dog from "../assets/img/dog5.png";
 
 import { useNavigation } from '@react-navigation/native';
 
-export default function TelaUsuario({ route }){
+export default function TelaUsuario({ route }) {
 
-    const { user } = route.params;
+    const { usuario } = route.params;
 
     const navigation = useNavigation();
- 
-    return(
-    <View style = {estilos.boxPrincipal}>  
-        <View style={estilos.boxTitulo}>
-            <View style = {estilos.titulo}>
-                <Text style={estilos.textTitulo}>ADOPETS</Text>
-                <Image source={pata} style = {estilos.imgTitulo}/>
+
+    return (
+        <View style={estilos.boxPrincipal}>
+            <View style={estilos.boxTitulo}>
+                <View style={estilos.titulo}>
+                    <Text style={estilos.textTitulo}>ADOPETS</Text>
+                    <Image source={pata} style={estilos.imgTitulo} />
+                </View>
+                <Text style={estilos.textInst}>USUARIO: {usuario.nome.toUpperCase()}</Text>
             </View>
-            <Text style={estilos.textInst}>USUARIO: {user.nome.toUpperCase()}</Text>
-        </View>
-        <Text style = {estilos.textOpcao}>SELECIONE UMA OPÇÃO:</Text>
-        <View style = {estilos.boxButton}>
-            <TouchableOpacity style={estilos.botao} onPress={() => navigation.navigate("BuscarAnimais_Usuario")}>
-                <Text style = {estilos.textBotao1}>
-                    BUSCAR ANIMAIS
-                </Text>
-                <Image source={lupa} style = {estilos.img}/>
+            <Text style={estilos.textOpcao}>SELECIONE UMA OPÇÃO:</Text>
+            <View style={estilos.boxButton}>
+                <TouchableOpacity style={estilos.botao} onPress={() => navigation.navigate("BuscarAnimais_Usuario")}>
+                    <Text style={estilos.textBotao1}>
+                        BUSCAR ANIMAIS
+                    </Text>
+                    <Image source={lupa} style={estilos.img} />
+                </TouchableOpacity>
+                <TouchableOpacity style={estilos.botao} onPress={() => navigation.navigate("BuscarInstituicao")}>
+                    <Text style={estilos.textBotao3}>
+                        BUSCAR INSTITUIÇÃO
+                    </Text>
+                    <Image source={lupa} style={estilos.img} />
+                </TouchableOpacity>
+            </View>
+            <TouchableOpacity onPress={() => navigation.navigate("TelaLogout")}>
+                <Text style={estilos.textLogout}>SAIR DO PERFIL</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={estilos.botao} onPress={() => navigation.navigate("BuscarInstituicao")}>
-                <Text style = {estilos.textBotao3}>
-                    BUSCAR INSTITUIÇÃO
-                </Text>
-                <Image source={lupa} style = {estilos.img}/>
-             </TouchableOpacity>
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate("TelaLogout")}>
-            <Text style = {estilos.textLogout}>SAIR DO PERFIL</Text>
-        </TouchableOpacity>
-    </View>)
+        </View>)
 }
 
 const estilos = StyleSheet.create({
@@ -66,14 +65,14 @@ const estilos = StyleSheet.create({
         fontFamily: "Cuprum-Bold",
         marginTop: 5,
         marginHorizontal: 5,
-        
+
     },
     textOpcao: {
         fontSize: 20,
         fontFamily: "Cuprum-Bold",
         marginTop: 20,
         marginHorizontal: 15,
-        
+
     },
     textLogout: {
         fontFamily: "Cuprum-Bold",
@@ -86,15 +85,15 @@ const estilos = StyleSheet.create({
         flexDirection: "row",
         marginHorizontal: 10,
     },
-    botao:{
+    botao: {
         width: 150,
         height: 115,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         marginTop: 100,
         marginHorizontal: 10,
         borderRadius: 20,
         borderWidth: 3,
-        borderColor: '#11E5BF'  
+        borderColor: '#11E5BF'
     },
     textBotao1: {
         marginTop: 5,
