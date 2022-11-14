@@ -1,46 +1,46 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Alert,
-  TouchableOpacity,
-  ScrollView
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    Alert,
+    TouchableOpacity,
+    ScrollView
 } from "react-native";
 
 export default function DeletarAnimais() {
     const [deletar, setDeletar] = useState("");
 
-  return (
-    <View style={estilos.Screen}>
-      <ScrollView style={estilos.boxPrincipal}>
-        <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL PARA DELETAR!</Text>
-        <View style={estilos.boxInput}>
-            <TextInput 
+    return (
+        <View style={estilos.Screen}>
+            <ScrollView style={estilos.boxPrincipal}>
+                <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL PARA DELETAR!</Text>
+                <View style={estilos.boxInput}>
+                    <TextInput
                         style={estilos.textImput}
                         onChangeText={setDeletar}
                         value={deletar}
                     />
+                </View>
+                <TouchableOpacity style={estilos.botao}>
+                    <Text style={estilos.textButton}>Delete</Text>
+                </TouchableOpacity>
+                <View style={estilos.boxDados}>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                </View>
+            </ScrollView>
         </View>
-        <TouchableOpacity style={estilos.botao}>
-          <Text style={estilos.textButton}>Delete</Text>
-        </TouchableOpacity>
-        <View style={estilos.boxDados}>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-            <Text>Teste Delete Animais</Text>
-        </View>
-      </ScrollView>
-    </View>
-  );
+    );
 }
 
 const estilos = StyleSheet.create({
@@ -48,7 +48,7 @@ const estilos = StyleSheet.create({
         flex: 1,
         backgroundColor: "#F58055"
     },
-        textTitulo: {
+    textTitulo: {
         fontSize: 50,
         fontFamily: "CuteFont-Regular",
         marginHorizontal: 60,
@@ -56,7 +56,7 @@ const estilos = StyleSheet.create({
         color: "#F58055",
         textAlign: "center"
     },
-        textSmall: {
+    textSmall: {
         fontSize: 10,
         fontFamily: "CuteFont-Regular",
         marginHorizontal: 100,
@@ -78,7 +78,7 @@ const estilos = StyleSheet.create({
         height: 45,
         marginHorizontal: 25,
         marginVertical: 8,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         borderRadius: 20,
         borderWidth: 3,
         borderColor: '#11E5BF',
@@ -105,7 +105,7 @@ const estilos = StyleSheet.create({
         height: 54,
         marginHorizontal: 45,
         marginTop: 30,
-        backgroundColor:'#F58055',
+        backgroundColor: '#F58055',
         borderRadius: 20,
         borderWidth: 3,
         justifyContent: 'center',

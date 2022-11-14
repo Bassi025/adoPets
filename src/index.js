@@ -18,6 +18,7 @@ import TelaLoading from './paginas/TelaLoading';
 import TelaLogout from './paginas/TelaLogout';
 import DeletarAnimais from './paginas/DeletarAnimais';
 import SituacaoAnimais from './paginas/SituacaoAnimais';
+import AdocoesAnimalStatus from './paginas/AdocoesAnimalStatus';
 import BuscarAnimaisUsuario from './paginas/BuscarAnimaisUsuario';
 import BuscarAnimaisInstUsuario from './paginas/BuscarAnimaisInstUsuario';
 import BuscarInstituicao from './paginas/BuscarInstituicao';
@@ -29,7 +30,6 @@ function Telas() {
     <AuthProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          {/* <Stack.Screen name="BuscarAnimais" component={BuscarAnimais} /> */}
           <Stack.Screen name="Menu" component={Menu} />
           <Stack.Screen name="Usuario" component={Usuario} />
           <Stack.Screen name="Instituicao" component={Instituicao} />
@@ -40,6 +40,7 @@ function Telas() {
           <Stack.Screen name="BuscarAnimais" component={BuscarAnimais} />
           <Stack.Screen name='DeletarAnimais' component={DeletarAnimais} />
           <Stack.Screen name='SituacaoAnimais' component={SituacaoAnimais} />
+          <Stack.Screen name='AdocoesAnimalStatus' component={AdocoesAnimalStatus} />
           <Stack.Screen name="TelaUsuario" component={TelaUsuario} />
           <Stack.Screen name="BuscarAnimaisUsuario" component={BuscarAnimaisUsuario} />
           <Stack.Screen name="BuscarAnimaisInstUsuario" component={BuscarAnimaisInstUsuario} />

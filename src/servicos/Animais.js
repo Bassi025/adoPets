@@ -5,7 +5,7 @@ export function animais() {
     db.transaction((transaction) => {
         transaction.executeSql("CREATE TABLE IF NOT EXISTS " +
             "animais " +
-            "(id INTEGER PRIMARY KEY AUTOINCREMENT,  id_instituicao INTEGER NOT NULL, nome TEXT NOT NULL, idade TEXT NOT NULL, pelagem TEXT NOT NULL, porte TEXT NOT NULL, imagem BLOB NOT NULL, FOREIGN KEY(id_instituicao) REFERENCES Instituicao(id) ON DELETE CASCADE);");
+            "(id INTEGER PRIMARY KEY AUTOINCREMENT,  id_instituicao INTEGER NOT NULL, nome TEXT NOT NULL, idade TEXT NOT NULL, pelagem TEXT NOT NULL, porte TEXT NOT NULL, imagem BLOB NOT NULL, FOREIGN KEY(id_instituicao) REFERENCES instituicoes(id) ON DELETE CASCADE);");
     })
 }
 
@@ -62,17 +62,6 @@ export async function filtrarAnimais(instituicao) {
 
                 if (animais.length > 0)
                     resolve(animais)
-            })
-        })
-    })
-}
-
-// Atualizar animal
-export async function atualizarAnimais(animal) {
-    return new Promise((resolve) => {
-        db.transaction((transaction) => {
-            transaction.executeSql("UPDATE animais SET nome = ?, idade = ?, pelagem = ?, porte = ? WHERE id = ?;", [animal.nome, animal.idade, animal.pelagem, animal.porte, animal.id], () => {
-                resolve("Animais foram atualizados")
             })
         })
     })

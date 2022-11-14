@@ -1,25 +1,38 @@
-import React, {useState} from "react";
-import {Text, View, Alert, StyleSheet, TouchableOpacity, Image} from "react-native";
+import React from "react";
+import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+
+import { AuthContext } from "../contexto/auth";
 
 import pata from "../assets/img/pata.png"
 
-export default function TelaLogout(){
+export default function TelaLogout() {
     const navigation = useNavigation();
-    
-    return(
-        <View style = {estilos.boxPrincipal}>
-            <Text style = {estilos.textTitulo}>GOSTARIA DE SAIR?</Text>
-            <TouchableOpacity style={estilos.botao}  onPress={()=> navigation.navigate("Menu")}>
-                <Text style = {estilos.textButton}>SIM</Text>
+
+    const { usuario, setUsuario, setInstituicao } = React.useContext(AuthContext);
+
+    return (
+        <View style={estilos.boxPrincipal}>
+            <Text style={estilos.textTitulo}>GOSTARIA DE SAIR?</Text>
+            <TouchableOpacity style={estilos.botao} onPress={() => {
+                setUsuario('')
+                setInstituicao('')
+                navigation.navigate("Menu")
+            }}>
+                <Text style={estilos.textButton}>SIM</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={estilos.botao} onPress={()=> navigation.navigate("TelaInstituicao")}>
-                <Text style = {estilos.textButton}>NAO</Text>
+            <TouchableOpacity style={estilos.botao} onPress={() => {
+                if (usuario?.nome !== undefined)
+                    navigation.navigate("TelaUsuario")
+                else
+                    navigation.navigate("TelaInstituicao")
+            }}>
+                <Text style={estilos.textButton}>NAO</Text>
             </TouchableOpacity>
 
-            <Image source={pata} style = {estilos.imagem}/>
+            <Image source={pata} style={estilos.imagem} />
         </View>
     );
 }
@@ -34,11 +47,11 @@ const estilos = StyleSheet.create({
     boxPrincipal: {
         width: '100%',
         height: '100%',
-        color:'white',
+        color: 'white',
         marginVertical: 37,
         marginHorizontal: 20,
         borderRadius: 6,
-        
+
     },
     botao: {
         width: 150,

@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+
 import dog from '../assets/img/dog4.jpg';
 
 export default function TelaLoading(){
     const navigation = useNavigation();
+    
     return (
         <View style={estilos.Screen}>
             <Text style={estilos.textTitulo}>ADOPETS</Text>

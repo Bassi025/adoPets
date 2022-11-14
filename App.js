@@ -17,11 +17,11 @@ export default function App() {
 
   useEffect(() => {
     // deletarTabelas(),
-    // criarDados();
-      instituicao(),
-      usuario(),
-      animais(),
-      adocao()
+    instituicao(),
+    usuario(),
+    animais(),
+    adocao(),
+    criarDados()
   }, [])
 
   const [fontsLoaded] = useFonts({

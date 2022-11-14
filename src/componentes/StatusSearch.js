@@ -1,43 +1,31 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-import { AuthContext } from '../contexto/auth';
-
-import dog from "../assets/img/dog5.png";
-
-const AnimalSearch = ({ animal }) => {
-    const { usuario } = React.useContext(AuthContext);
-
+const StatusSearch = ({ adocao }) => {
     const navigation = useNavigation();
 
-    function buscarAnimaisPorInstituicao() {
-        if (usuario?.nome !== undefined)
-            navigation.navigate("BuscarAnimaisInstUsuario", { animal: animal });
-        else
-            return;
+    function alterarStatus() {
+        navigation.navigate("AdocoesAnimalStatus", { adocoes: adocao });
     }
 
     return (
-        <TouchableOpacity style={style.card} onPress={() => buscarAnimaisPorInstituicao()}>
-            <View style={style.containerImage}>
-                {animal.imagem ?
-                    <Image source={{ uri: animal.imagem }} style={style.image} /> :
-                    <Image source={dog} style={style.image} />
-                }
-            </View>
+        <TouchableOpacity style={style.card} onPress={() => {alterarStatus()}}>
             <View style={style.info}>
-                <Text style={style.name}>Nome: {animal.nome}</Text>
-                <Text style={style.name}>Idade: {animal.idade}</Text>
-                <Text style={style.name}>Pelagem: {animal.pelagem}</Text>
-                <Text style={style.name}>Porte: {animal.porte}</Text>
+                <Text style={style.textInfo}>Nome do animal: {adocao.nome_animal}</Text>
+                <Text style={style.textInfo}>Nome da instituição: {adocao.nome_instituicao}</Text>
+                <Text style={style.textInfo}>Status: {adocao.status == 0 ? 'Disponível para adoção' : 'Adotado'}</Text>
+                <Text style={style.textInfo}>Data de adoção: {adocao.dataAdocao}</Text>
+            </View>
+            <View style={style.cardText}>
+                <Text style={style.text}>Alterar Status</Text>
             </View>
         </TouchableOpacity>
     )
 }
 
 const style = StyleSheet.create({
-    name: {
+    textInfo: {
         fontSize: 14,
         lineHeight: 22,
         fontWeight: "bold",
@@ -84,6 +72,17 @@ const style = StyleSheet.create({
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
     },
+    cardText: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        marginRight: 16,
+        marginBottom: 8
+    },
+    text: {
+        color: '#F58055'
+    }
 });
 
-export default AnimalSearch
+export default StatusSearch
