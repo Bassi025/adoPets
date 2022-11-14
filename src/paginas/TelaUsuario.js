@@ -25,7 +25,7 @@ export default function TelaUsuario() {
             </View>
             <Text style={estilos.textOpcao}>SELECIONE UMA OPÇÃO:</Text>
             <View style={estilos.boxButton}>
-                <TouchableOpacity style={estilos.botao} onPress={() => navigation.navigate("BuscarAnimais_Usuario")}>
+                <TouchableOpacity style={estilos.botao} onPress={() => navigation.navigate("BuscarAnimaisUsuario")}>
                     <Text style={estilos.textBotao1}>
                         BUSCAR ANIMAIS
                     </Text>

@@ -1,9 +1,24 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
+import { AuthContext } from '../contexto/auth';
+
 const AnimalSearch = ({ animal }) => {
+    const { usuario } = React.useContext(AuthContext);
+
+    const navigation = useNavigation();
+
+    function buscarAnimaisPorInstituicao() {
+        if (usuario?.nome !== undefined) {
+            navigation.navigate("BuscarAnimaisInstUsuario", { animal: animal });
+        } else {
+            return;
+        }
+    }
+
     return (
-        <TouchableOpacity style={style.card} onPress={() => console.log(animal.id)}>
+        <TouchableOpacity style={style.card} onPress={() => buscarAnimaisPorInstituicao()}>
             <View style={style.containerImage}>
                 {animal.imagem && <Image source={{ uri: animal.imagem }} style={style.image} />}
             </View>
