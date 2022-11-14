@@ -1,14 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+
+import { AuthContext } from "../contexto/auth";
+
 import lupa from "../assets/img/lupa.jpg";
 import pata from "../assets/img/pata.png";
 
-import { useNavigation } from '@react-navigation/native';
-
-export default function TelaUsuario({ route }) {
-
-    const { usuario } = route.params;
+export default function TelaUsuario() {
+    
+    const { usuario } = React.useContext(AuthContext);
 
     const navigation = useNavigation();
 
@@ -19,7 +21,7 @@ export default function TelaUsuario({ route }) {
                     <Text style={estilos.textTitulo}>ADOPETS</Text>
                     <Image source={pata} style={estilos.imgTitulo} />
                 </View>
-                <Text style={estilos.textInst}>USUARIO: {usuario.nome.toUpperCase()}</Text>
+                <Text style={estilos.textInst}>USUARIO: {usuario?.nome.toUpperCase()}</Text>
             </View>
             <Text style={estilos.textOpcao}>SELECIONE UMA OPÇÃO:</Text>
             <View style={estilos.boxButton}>

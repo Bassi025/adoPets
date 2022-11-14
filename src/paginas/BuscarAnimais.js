@@ -9,7 +9,9 @@ import {
   FlatList
 } from 'react-native';
 
-import { buscarAnimais, buscarAnimal } from '../servicos/Animais';
+import { AuthContext } from '../contexto/auth';
+
+import { buscarAnimal, filtrarAnimais } from '../servicos/Animais';
 
 import AnimalSearch from '../componentes/AnimalSearch';
 
@@ -18,10 +20,13 @@ export default function BuscarAnimais() {
   const [animais, setAnimais] = useState([{}]);
   const [busca, setBusca] = useState("");
 
-  // Buscar todos os animais
+  const { instituicao } = React.useContext(AuthContext);
+
+  // Buscar animais da instituição
   async function mostrarAnimais() {
     try {
-      const response = await buscarAnimais();
+      const response = await filtrarAnimais(instituicao.id);
+      console.log(response)
       setAnimais(response);
     } catch (error) {
       alert("Error to request database.");

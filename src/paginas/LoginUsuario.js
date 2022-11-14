@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { AuthContext } from "../contexto/auth";
+
 import { logarUsuario } from '../servicos/Usuario';
 
 import { Formik, Form } from 'formik';
@@ -17,7 +19,9 @@ import FormikControl from "../componentes/FormikControl";
 export default function UsuarioLogin() {
 
     const navigation = useNavigation();
-
+    
+    const { setUsuario } = React.useContext(AuthContext);
+    
     // Efetuar o login do usuário
     async function logar(values) {
         const { login, senha } = values;
@@ -27,9 +31,10 @@ export default function UsuarioLogin() {
                 cpf: senha
             }
             const response = await logarUsuario(dadosUsuario)
+            setUsuario(response);
+
             alert('Login efetuado com sucesso!');
-            // console.log(response);
-            navigation.navigate("TelaUsuario", { usuario: response });
+            navigation.navigate("TelaUsuario");
         } catch (error) {
             alert('ERROR: ' + error)
         }

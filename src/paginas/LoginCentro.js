@@ -2,6 +2,8 @@ import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { AuthContext } from "../contexto/auth";
+
 import { logarInstituicao } from "../servicos/Instituicao";
 
 import { Formik, Form } from 'formik';
@@ -13,6 +15,8 @@ export default function CentroLogin() {
 
     const navigation = useNavigation();
 
+    const { setInstituicao } = React.useContext(AuthContext);
+
     // Efetuar o login da instituição
     async function logar(values) {
         const { login, senha } = values;
@@ -22,9 +26,10 @@ export default function CentroLogin() {
                 cnpj: senha
             }
             const response = await logarInstituicao(dadosInstituicao)
+            setInstituicao(response)
+
             alert('Login efetuado com sucesso!');
-            // console.log(response);
-            navigation.navigate("TelaInstituicao", { instituicao: response });
+            navigation.navigate("TelaInstituicao");
         } catch (error) {
             alert('ERROR: ' + error)
         }

@@ -14,7 +14,7 @@ export async function adicionarAdocao(adocao) {
     return new Promise((resolve) => {
         db.transaction((transaction) => {
             transaction.executeSql("INSERT INTO adocoes (id_instituicao, id_usuario, id_animal, status, dataAdocao) VALUES (?,?,?,?,?)",
-                [adocao.id_instituicao, adocao.id_usuario, adocao.id_animal, adocao.status], (_, resultado) => {
+                [adocao.id_instituicao, adocao.id_usuario, adocao.id_animal, adocao.status, adocao.dataAdocao], (_, resultado) => {
                     if (resultado.rowsAffected > 0)
                         resolve("Adocao criada adicionado com sucesso!");
                 })

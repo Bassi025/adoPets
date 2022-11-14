@@ -7,6 +7,7 @@ import { useFonts } from 'expo-font';
 import AppLoading from "expo-app-loading";
 
 import { deletarTabelas } from "./src/servicos/DeletarTabelas";
+import { criarDados } from "./src/servicos/CriarDados";
 import { instituicao } from "./src/servicos/Instituicao";
 import { usuario } from "./src/servicos/Usuario";
 import { animais } from "./src/servicos/Animais";
@@ -16,6 +17,7 @@ export default function App() {
 
   useEffect(() => {
     // deletarTabelas(),
+    // criarDados();
       instituicao(),
       usuario(),
       animais(),

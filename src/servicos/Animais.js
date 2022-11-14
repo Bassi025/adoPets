@@ -56,9 +56,12 @@ export async function filtrarAnimais(instituicao) {
     return new Promise((resolve) => {
         db.transaction((transaction) => {
             transaction.executeSql("SELECT * FROM animais WHERE id_instituicao = ?;", [instituicao], (_, resultado) => {
-                var tamanho = resultado.rows.length;
-                if (tamanho > 0)
-                    resolve(resultado.rows.item(0));
+                var animais = [];
+                for (let i = 0; i < resultado.rows.length; ++i)
+                    animais.push(resultado.rows.item(i));
+
+                if (animais.length > 0)
+                    resolve(animais)
             })
         })
     })

@@ -3,6 +3,8 @@ import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { AuthProvider } from './contexto/auth';
+
 import Menu from './paginas/Menu';
 import Usuario from './paginas/LoginUsuario';
 import Instituicao from './paginas/LoginCentro';
@@ -23,25 +25,28 @@ const Stack = createNativeStackNavigator();
 
 function Telas() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Menu" component={Menu} />
-        <Stack.Screen name="Usuario" component={Usuario} />
-        <Stack.Screen name="Instituicao" component={Instituicao} />
-        <Stack.Screen name="UsuarioCadastro" component={UsuarioCadastro} />
-        <Stack.Screen name="CentroAdocaoCadastro" component={CentroAdocaoCadastro} />
-        <Stack.Screen name="TelaInstituicao" component={TelaInstituicao} />
-        <Stack.Screen name="AnimalCadastro" component={AnimalCadastro} />
-        <Stack.Screen name="BuscarAnimais" component={BuscarAnimais} />
-        <Stack.Screen name='DeletarAnimais' component={DeletarAnimais} />
-        <Stack.Screen name='SituacaoAnimais' component={SituacaoAnimais} />
-        <Stack.Screen name="TelaUsuario" component={TelaUsuario} />
-        <Stack.Screen name="BuscarAnimaisUsuario" component={BuscarAnimaisUsuario} />
-        <Stack.Screen name="BuscarInstituicao" component={BuscarInstituicao} />
-        <Stack.Screen name="TelaLoading" component={TelaLoading} />
-        <Stack.Screen name="TelaLogout" component={TelaLogout} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {/* <Stack.Screen name="BuscarAnimais" component={BuscarAnimais} /> */}
+          <Stack.Screen name="Menu" component={Menu} />
+          <Stack.Screen name="Usuario" component={Usuario} />
+          <Stack.Screen name="Instituicao" component={Instituicao} />
+          <Stack.Screen name="UsuarioCadastro" component={UsuarioCadastro} />
+          <Stack.Screen name="CentroAdocaoCadastro" component={CentroAdocaoCadastro} />
+          <Stack.Screen name="TelaInstituicao" component={TelaInstituicao} />
+          <Stack.Screen name="AnimalCadastro" component={AnimalCadastro} />
+          <Stack.Screen name="BuscarAnimais" component={BuscarAnimais} />
+          <Stack.Screen name='DeletarAnimais' component={DeletarAnimais} />
+          <Stack.Screen name='SituacaoAnimais' component={SituacaoAnimais} />
+          <Stack.Screen name="TelaUsuario" component={TelaUsuario} />
+          <Stack.Screen name="BuscarAnimaisUsuario" component={BuscarAnimaisUsuario} />
+          <Stack.Screen name="BuscarInstituicao" component={BuscarInstituicao} />
+          <Stack.Screen name="TelaLoading" component={TelaLoading} />
+          <Stack.Screen name="TelaLogout" component={TelaLogout} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   )
 }
 

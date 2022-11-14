@@ -9,13 +9,15 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 
+import { AuthContext } from "../contexto/auth";
+
 import lupa from "../assets/img/lupa.jpg";
 import pata from "../assets/img/pata.png";
 import dog from "../assets/img/dog5.png";
 
-export default function TelaInstituicao({ route }) {
+export default function TelaInstituicao() {
 
-    const instituicao = route.params?.instituicao;
+    const { instituicao } = React.useContext(AuthContext);
 
     const navigation = useNavigation();
 
