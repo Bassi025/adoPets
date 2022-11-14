@@ -48,7 +48,7 @@ export default function SituacaoAnimais() {
     return (
       <View>
         {JSON.stringify(item) !== "{}" ?
-          <StatusSearch adocao={item} />:
+          <StatusSearch adocao={item} /> :
           <View>
             <Text style={estilos.nome}>Não há adoções cadastradas.</Text>
           </View>

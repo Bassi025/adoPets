@@ -4,7 +4,6 @@ import {
     Text,
     TextInput,
     StyleSheet,
-    Alert,
     TouchableOpacity,
     ScrollView
 } from "react-native";
@@ -20,7 +19,6 @@ export default function DeletarAnimais() {
                     <TextInput
                         style={estilos.textImput}
                         onChangeText={setDeletar}
-                        value={deletar}
                     />
                 </View>
                 <TouchableOpacity style={estilos.botao}>

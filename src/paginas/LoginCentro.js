@@ -28,7 +28,7 @@ export default function CentroLogin() {
             const response = await logarInstituicao(dadosInstituicao)
             setInstituicao(response);
             setUsuario('');
-            
+
             alert('Login efetuado com sucesso!');
             navigation.navigate("TelaInstituicao");
         } catch (error) {

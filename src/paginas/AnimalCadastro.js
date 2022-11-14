@@ -39,7 +39,7 @@ export default function AnimalCadastro() {
       setImage(result.uri);
     }
   };
-  
+
   // Efetuar cadastro do animal
   async function cadastrarAnimal(values, resetForm) {
     const { nome, idade, pelagem, porte, instituicao } = values;
@@ -94,7 +94,7 @@ export default function AnimalCadastro() {
             instituicao: undefined,
           }}
           validationSchema={validationSchema}
-          onSubmit={(values, {resetForm}) => cadastrarAnimal(values, resetForm)}
+          onSubmit={(values, { resetForm }) => cadastrarAnimal(values, resetForm)}
         >
           {({ handleSubmit }) => (
             <Form>

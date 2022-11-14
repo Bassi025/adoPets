@@ -31,14 +31,10 @@ const style = StyleSheet.create({
         fontWeight: "bold",
     },
     containerImage: {
-        // justifyContent: 'center',
-        // alignItems: 'center'
         width: '100%',
         height: 400,
     },
     image: {
-        // width: 100,
-        // height: 100,
         marginHorizontal: 10,
         marginTop: 10,
         flex: 1,

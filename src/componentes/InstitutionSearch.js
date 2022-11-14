@@ -5,29 +5,25 @@ const InstitutionSearch = ({ instituicao }) => {
     return (
         <TouchableOpacity style={style.card} onPress={() => console.log(instituicao.id)}>
             <View style={style.info}>
-                <Text style={style.name}>Nome: {instituicao.nome}</Text>
-                <Text style={style.name}>Endereço: {instituicao.cnpj}</Text>
-                <Text style={style.name}>Cnpj: {instituicao.endereco}</Text>
+                <Text style={style.textInfo}>Nome: {instituicao.nome}</Text>
+                <Text style={style.textInfo}>Endereço: {instituicao.cnpj}</Text>
+                <Text style={style.textInfo}>Cnpj: {instituicao.endereco}</Text>
             </View>
         </TouchableOpacity>
     )
 }
 
 const style = StyleSheet.create({
-    name: {
+    textInfo: {
         fontSize: 14,
         lineHeight: 22,
         fontWeight: "bold",
     },
     containerImage: {
-        // justifyContent: 'center',
-        // alignItems: 'center'
         width: '100%',
         height: 400,
     },
     image: {
-        // width: 100,
-        // height: 100,
         marginHorizontal: 10,
         marginTop: 10,
         flex: 1,

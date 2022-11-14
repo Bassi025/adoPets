@@ -9,7 +9,7 @@ import lupa from "../assets/img/lupa.jpg";
 import pata from "../assets/img/pata.png";
 
 export default function TelaUsuario() {
-    
+
     const { usuario } = React.useContext(AuthContext);
 
     const navigation = useNavigation();

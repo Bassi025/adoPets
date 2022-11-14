@@ -55,7 +55,7 @@ export default function UsuarioCadastro() {
                         telefone: ''
                     }}
                     validationSchema={validationSchema}
-                    onSubmit={(values, {resetForm}) => cadastrarUsuario(values, resetForm)}
+                    onSubmit={(values, { resetForm }) => cadastrarUsuario(values, resetForm)}
                 >
                     {({ handleSubmit }) => (
                         <Form>

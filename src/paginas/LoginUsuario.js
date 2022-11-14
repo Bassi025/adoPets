@@ -19,9 +19,9 @@ import FormikControl from "../componentes/FormikControl";
 export default function UsuarioLogin() {
 
     const navigation = useNavigation();
-    
+
     const { setUsuario } = React.useContext(AuthContext);
-    
+
     // Efetuar o login do usuário
     async function logar(values) {
         const { login, senha } = values;

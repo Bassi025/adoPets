@@ -50,7 +50,7 @@ export default function CentroAdocaoCadastro() {
                         cnpj: ''
                     }}
                     validationSchema={validationSchema}
-                    onSubmit={(values, {resetForm}) => cadastrarInstituicao(values, resetForm)}
+                    onSubmit={(values, { resetForm }) => cadastrarInstituicao(values, resetForm)}
                 >
                     {({ handleSubmit }) => (
                         <Form>

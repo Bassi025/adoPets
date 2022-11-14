@@ -27,30 +27,26 @@ const AnimalSearch = ({ animal }) => {
                 }
             </View>
             <View style={style.info}>
-                <Text style={style.name}>Nome: {animal.nome}</Text>
-                <Text style={style.name}>Idade: {animal.idade}</Text>
-                <Text style={style.name}>Pelagem: {animal.pelagem}</Text>
-                <Text style={style.name}>Porte: {animal.porte}</Text>
+                <Text style={style.textInfo}>Nome: {animal.nome}</Text>
+                <Text style={style.textInfo}>Idade: {animal.idade}</Text>
+                <Text style={style.textInfo}>Pelagem: {animal.pelagem}</Text>
+                <Text style={style.textInfo}>Porte: {animal.porte}</Text>
             </View>
         </TouchableOpacity>
     )
 }
 
 const style = StyleSheet.create({
-    name: {
+    textInfo: {
         fontSize: 14,
         lineHeight: 22,
         fontWeight: "bold",
     },
     containerImage: {
-        // justifyContent: 'center',
-        // alignItems: 'center'
         width: '100%',
         height: 400,
     },
     image: {
-        // width: 100,
-        // height: 100,
         marginHorizontal: 10,
         marginTop: 10,
         flex: 1,

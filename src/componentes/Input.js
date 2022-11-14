@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import { Field, ErrorMessage } from 'formik';
 
 import TextError from './TextError';
@@ -32,9 +33,7 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: 'white',
         borderRadius: 10,
-        border: 'none',
-        // borderColor: 'gray',
-        // borderWidth: StyleSheet.hairlineWidth,
+        border: 'none'
     }
 })
 

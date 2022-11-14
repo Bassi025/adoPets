@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import { Field, ErrorMessage } from 'formik';
+
 import TextError from './TextError';
 
 function Select(props) {
@@ -11,7 +13,7 @@ function Select(props) {
       <label htmlFor={name}>{label}</label>
       <Field style={styles.textInput} as='select' id={name} name={name} {...rest}>
         <option defaultValue={true}>
-          Instituicao..
+          Selecione a Instituicao..
         </option>
         {options.map(option => {
           return (
