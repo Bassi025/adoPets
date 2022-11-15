@@ -9,17 +9,22 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
-import { adicionarAnimal } from '../servicos/Animais';
-import { buscarInstituicoes } from '../servicos/Instituicao';
-
 import { Formik, Form } from 'formik';
 import * as yup from 'yup';
 
+import { AuthContext } from "../contexto/auth";
+
 import FormikControl from '../componentes/FormikControl';
+
+import { adicionarAnimal } from '../servicos/Animais';
+import { buscarInstituicaoLogada } from '../servicos/Instituicao';
+
 
 export default function AnimalCadastro() {
   
   const navigation = useNavigation();
+
+  const { instituicao } = React.useContext(AuthContext);
 
   const [instituicoes, setIntituicoes] = useState([]);
 
@@ -66,10 +71,10 @@ export default function AnimalCadastro() {
     }
   }
 
-  // Buscar instituições
-  async function mostrarIntituicoes() {
+  // Buscar instituição logada
+  async function mostrarIntituicao() {
     try {
-      const response = await buscarInstituicoes();
+      const response = await buscarInstituicaoLogada(instituicao.id);
       setIntituicoes(response);
     } catch (error) {
       alert("Houve um erro interno no servidor");
@@ -78,7 +83,7 @@ export default function AnimalCadastro() {
   }
 
   useEffect(() => {
-    mostrarIntituicoes();
+    mostrarIntituicao();
   }, []);
 
   return (
@@ -159,7 +164,7 @@ export default function AnimalCadastro() {
 const validationSchema = yup.object().shape({
   nome: yup
     .string()
-    .min(6, ({ min }) => `Nome deve ter no minímo ${min} caracteres`)
+    .min(3, ({ min }) => `Nome deve ter no minímo ${min} caracteres`)
     .required('O nome é obrigatório'),
   idade: yup
     .string()

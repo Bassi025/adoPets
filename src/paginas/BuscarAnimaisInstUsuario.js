@@ -17,7 +17,6 @@ export default function BuscarAnimaisInstUsuario({ route }) {
     async function mostrarAnimais() {
         try {
             const response = await filtrarAnimaisDisponiveisInst(id);
-            console.log(response)
             setAnimais(response);
         } catch (error) {
             alert("Error to request database.");

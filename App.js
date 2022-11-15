@@ -16,7 +16,7 @@ import { adocao } from "./src/servicos/Adocao";
 export default function App() {
 
   useEffect(() => {
-    // deletarTabelas(),
+    deletarTabelas(),
     instituicao(),
     usuario(),
     animais(),

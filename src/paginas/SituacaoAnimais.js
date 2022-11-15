@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -9,12 +9,16 @@ import {
   FlatList
 } from "react-native";
 
-import { filtrarAdocoes, filtrarAdocoesPorAnimal } from "../servicos/Adocao";
+import { AuthContext } from "../contexto/auth";
+
+import { filtrarAdocoesInst, filtrarAdocoesPorAnimal } from "../servicos/Adocao";
 
 import StatusSearch from "../componentes/StatusSearch";
 
 export default function SituacaoAnimais() {
-  
+
+  const { instituicao } = React.useContext(AuthContext);
+
   const [adocaoAnimal, setAdocaoAnimal] = useState({});
   const [adocoes, setAdocoes] = useState([{}]);
   const [busca, setBusca] = useState("");
@@ -22,8 +26,8 @@ export default function SituacaoAnimais() {
   // Buscar situação dos animais da instituição
   async function mostrarAdocoes() {
     try {
-      const response = await filtrarAdocoes();
-      setAdocoes(response)
+      const response = await filtrarAdocoesInst(instituicao.id);
+      setAdocoes(response);
     } catch (error) {
       alert("Error to request database.");
       console.log(error);
@@ -32,7 +36,7 @@ export default function SituacaoAnimais() {
 
   useEffect(useCallback(() => {
     mostrarAdocoes();
-  }, []))
+  }, []));
 
   // Buscar animal pelo nome da instituição
   async function procurarAdocoesPorAnimal() {

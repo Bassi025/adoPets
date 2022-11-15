@@ -38,7 +38,27 @@ export async function buscarAdocoes() {
     })
 }
 
-// Filtrar animais adotados tabelas (Animal, Instituição e Adoção)
+// Filtrar animais e status da instituição logada
+export async function filtrarAdocoesInst(instituicao) {
+    return new Promise((resolve) => {
+        db.transaction((transaction) => {
+            transaction.executeSql("SELECT animais.nome AS nome_animal, instituicoes.nome AS nome_instituicao, adocoes.id AS id_adocao, adocoes.status, adocoes.dataAdocao FROM animais INNER JOIN instituicoes ON instituicoes.id = animais.id_instituicao INNER JOIN adocoes ON adocoes.id_animal = animais.id WHERE instituicoes.id = ?;", [instituicao], (_, resultado) => {
+                var adocoes = [];
+                for (let i = 0; i < resultado.rows.length; ++i)
+                    adocoes.push(resultado.rows.item(i));
+
+                if (adocoes.length > 0)
+                    resolve(adocoes)
+            },
+                (_, error) => {
+                    console.log(error);
+                }
+            )
+        })
+    })
+}
+
+// Filtrar animais e status de todas as instituições cadastradas
 export async function filtrarAdocoes() {
     return new Promise((resolve) => {
         db.transaction((transaction) => {

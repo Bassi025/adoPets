@@ -35,13 +35,13 @@ function Telas() {
           <Stack.Screen name="Instituicao" component={Instituicao} />
           <Stack.Screen name="UsuarioCadastro" component={UsuarioCadastro} />
           <Stack.Screen name="CentroAdocaoCadastro" component={CentroAdocaoCadastro} />
-          <Stack.Screen name="TelaInstituicao" component={TelaInstituicao} />
+          <Stack.Screen name="TelaInstituicao" component={TelaInstituicao} options={{ headerLeft: null }} />
           <Stack.Screen name="AnimalCadastro" component={AnimalCadastro} />
           <Stack.Screen name="BuscarAnimais" component={BuscarAnimais} />
           <Stack.Screen name='DeletarAnimais' component={DeletarAnimais} />
           <Stack.Screen name='SituacaoAnimais' component={SituacaoAnimais} />
           <Stack.Screen name='AdocoesAnimalStatus' component={AdocoesAnimalStatus} />
-          <Stack.Screen name="TelaUsuario" component={TelaUsuario} />
+          <Stack.Screen name="TelaUsuario" component={TelaUsuario} options={{ headerLeft: null }} />
           <Stack.Screen name="BuscarAnimaisUsuario" component={BuscarAnimaisUsuario} />
           <Stack.Screen name="BuscarInstituicao" component={BuscarInstituicao} />
           <Stack.Screen name="BuscarAnimaisInstUsuario" component={BuscarAnimaisInstUsuario} />

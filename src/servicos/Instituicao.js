@@ -31,7 +31,7 @@ export async function adicionarInstituicao(instituicao) {
 export async function logarInstituicao(instituicao) {
     return new Promise((resolve, reject) => {
         db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM instituicoes WHERE nome = ? AND cnpj = ?",
+            transaction.executeSql("SELECT * FROM instituicoes WHERE nome = ? AND cnpj = ?;",
                 [`${instituicao.nome}`, `${instituicao.cnpj}`], (_, resultado) => {
                     var tamanho = resultado.rows.length;
                     if (tamanho > 0)
@@ -47,7 +47,7 @@ export async function logarInstituicao(instituicao) {
 export async function buscarInstituicao(nome) {
     return new Promise((resolve) => {
         db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM instituicoes where nome LIKE ?", [`${nome}`], (_, resultado) => {
+            transaction.executeSql("SELECT * FROM instituicoes where nome LIKE ?;", [`${nome}`], (_, resultado) => {
                 var tamanho = resultado.rows.length;
                 if (tamanho > 0)
                     resolve(resultado.rows.item(0));
@@ -60,7 +60,7 @@ export async function buscarInstituicao(nome) {
 export async function buscarInstituicoes() {
     return new Promise((resolve) => {
         db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM instituicoes", [], (_, resultado) => {
+            transaction.executeSql("SELECT * FROM instituicoes;", [], (_, resultado) => {
                 var instituicoes = [];
                 for (let i = 0; i < resultado.rows.length; ++i)
                     instituicoes.push(resultado.rows.item(i));
@@ -72,15 +72,22 @@ export async function buscarInstituicoes() {
     })
 }
 
-// Filtrar instituição por cnpj
-export async function filtrarInstituicao(instituicao) {
+// Buscar instituição que está logada
+export async function buscarInstituicaoLogada(instituicao) {
     return new Promise((resolve) => {
         db.transaction((transaction) => {
-            transaction.executeSql("SELECT id, nome FROM instituicoes WHERE cnpj = ?;", [instituicao.cnpj], (_, resultado) => {
-                var tamanho = resultado.rows.length;
-                if (tamanho > 0)
-                    resolve(resultado.rows.item(0));
-            })
+            transaction.executeSql("SELECT * FROM instituicoes WHERE id = ?;", [instituicao], (_, resultado) => {
+                var instituicoes = [];
+                for (let i = 0; i < resultado.rows.length; ++i)
+                    instituicoes.push(resultado.rows.item(i));
+
+                if (instituicoes.length > 0)
+                    resolve(instituicoes)
+            },
+                (_, error) => {
+                    console.log(error);
+                }
+            )
         })
     })
 }
