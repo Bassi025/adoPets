@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 const StatusSearch = ({ adocao }) => {
+    
     const navigation = useNavigation();
 
     function alterarStatus() {

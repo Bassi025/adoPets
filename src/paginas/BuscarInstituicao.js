@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
 
 import { buscarInstituicoes, buscarInstituicao } from '../servicos/Instituicao';
@@ -6,6 +6,7 @@ import { buscarInstituicoes, buscarInstituicao } from '../servicos/Instituicao';
 import InstitutionSearch from '../componentes/InstitutionSearch';
 
 export default function BuscarInstituicao() {
+  
   const [instituicao, setIntituicao] = useState({});
   const [instituicoes, setIntituicoes] = useState([{}]);
   const [busca, setBusca] = useState("");
@@ -14,7 +15,6 @@ export default function BuscarInstituicao() {
   async function mostrarInstituicoes() {
     try {
       const response = await buscarInstituicoes();
-      console.log(response)
       setIntituicoes(response);
     } catch (error) {
       alert("Error to request database.");
@@ -22,9 +22,9 @@ export default function BuscarInstituicao() {
     }
   }
 
-  useEffect(() => {
+  useEffect(useCallback(() => {
     mostrarInstituicoes();
-  }, [instituicao]);
+  }, [instituicao]));
 
   // Buscar instituição pelo nome
   async function procurarInstituicao() {

@@ -43,8 +43,8 @@ function Telas() {
           <Stack.Screen name='AdocoesAnimalStatus' component={AdocoesAnimalStatus} />
           <Stack.Screen name="TelaUsuario" component={TelaUsuario} />
           <Stack.Screen name="BuscarAnimaisUsuario" component={BuscarAnimaisUsuario} />
-          <Stack.Screen name="BuscarAnimaisInstUsuario" component={BuscarAnimaisInstUsuario} />
           <Stack.Screen name="BuscarInstituicao" component={BuscarInstituicao} />
+          <Stack.Screen name="BuscarAnimaisInstUsuario" component={BuscarAnimaisInstUsuario} />
           <Stack.Screen name="TelaLoading" component={TelaLoading} />
           <Stack.Screen name="TelaLogout" component={TelaLogout} />
         </Stack.Navigator>

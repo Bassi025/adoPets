@@ -15,7 +15,7 @@ export default function CentroLogin() {
 
     const navigation = useNavigation();
 
-    const { setInstituicao, setUsuario } = React.useContext(AuthContext);
+    const { setInstituicao } = React.useContext(AuthContext);
 
     // Efetuar o login da instituição
     async function logar(values) {
@@ -27,7 +27,6 @@ export default function CentroLogin() {
             }
             const response = await logarInstituicao(dadosInstituicao)
             setInstituicao(response);
-            setUsuario('');
 
             alert('Login efetuado com sucesso!');
             navigation.navigate("TelaInstituicao");

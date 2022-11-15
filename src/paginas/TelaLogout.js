@@ -8,6 +8,7 @@ import { AuthContext } from "../contexto/auth";
 import pata from "../assets/img/pata.png"
 
 export default function TelaLogout() {
+    
     const navigation = useNavigation();
 
     const { usuario, setUsuario, setInstituicao } = React.useContext(AuthContext);

@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import pata from "../assets/img/pata.png";
 
 export default function Menu() {
+    
     const navigation = useNavigation();
 
     return (

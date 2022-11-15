@@ -6,6 +6,7 @@ import { ErrorMessage } from 'formik';
 import TextError from './TextError';
 
 function ImagePickerComponent(props) {
+    
     const { label, name, image, fn: pickerImage, ...rest } = props;
 
     return (

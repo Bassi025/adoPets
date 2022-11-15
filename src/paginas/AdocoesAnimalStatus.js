@@ -12,6 +12,7 @@ import FormikControl from '../componentes/FormikControl';
 import pata from "../assets/img/pata.png";
 
 export default function AdocoesAnimalStatus({ route }) {
+    
     const navigation = useNavigation();
 
     const { id_adocao, nome_animal, nome_instituicao, dataAdocao } = route.params?.adocoes;

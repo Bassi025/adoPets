@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList, Image } from 'react-native';
 
-import { filtrarAnimais } from '../servicos/Animais';
+import { filtrarAnimaisDisponiveisInst } from '../servicos/Animais';
 
 import AnimalSearch from '../componentes/AnimalSearch';
 
@@ -9,14 +9,15 @@ import pata from "../assets/img/pata.png";
 
 export default function BuscarAnimaisInstUsuario({ route }) {
 
-    const { id_instituicao } = route.params?.animal;
+    const { id } = route.params?.instituicao;
 
     const [animais, setAnimais] = useState([{}]);
 
     // Buscar animais da instituição
     async function mostrarAnimais() {
         try {
-            const response = await filtrarAnimais(id_instituicao);
+            const response = await filtrarAnimaisDisponiveisInst(id);
+            console.log(response)
             setAnimais(response);
         } catch (error) {
             alert("Error to request database.");
@@ -78,7 +79,6 @@ const estilos = StyleSheet.create({
         elevation: 4
     },
     boxTitulo: {
-        // height: "26%",
         backgroundColor: "#F58055",
     },
     titulo: {
@@ -98,7 +98,6 @@ const estilos = StyleSheet.create({
     },
     boxDados: {
         width: "90%",
-        // height: "50%",
         backgroundColor: "#E8DFDD",
         marginHorizontal: 15,
         marginVertical: 40,

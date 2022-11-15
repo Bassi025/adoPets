@@ -16,6 +16,7 @@ import * as yup from 'yup';
 import FormikControl from '../componentes/FormikControl';
 
 export default function UsuarioCadastro() {
+    
     const navigation = useNavigation();
 
     // Efetuar cadastro do usuário

@@ -6,7 +6,9 @@ import ImagePicker from './ImagePicker';
 import RadioButtons from './RadioButtons';
 
 function FormikControl(props) {
+    
     const { control, ...rest } = props
+    
     switch (control) {
         case 'input':
             return <Input {...rest} />

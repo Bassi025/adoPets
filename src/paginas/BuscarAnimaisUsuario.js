@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
 
-import { buscarAnimais, buscarAnimal } from '../servicos/Animais';
+import { filtrarAnimaisDisponiveis, filtrarAnimalDisponivel } from '../servicos/Animais';
 
 import AnimalSearch from '../componentes/AnimalSearch';
 
@@ -14,7 +14,7 @@ export default function BuscarAnimaisUsuario() {
   // Buscar todos os animais
   async function mostrarAnimais() {
     try {
-      const response = await buscarAnimais();
+      const response = await filtrarAnimaisDisponiveis();
       setAnimais(response);
     } catch (error) {
       alert("Error to request database.");
@@ -22,14 +22,14 @@ export default function BuscarAnimaisUsuario() {
     }
   }
 
-  useEffect(() => {
+  useEffect(useCallback(() => {
     mostrarAnimais();
-  }, [animal])
+  }, [animal]));
 
   // Buscar animal pelo nome
   async function procurarAnimal() {
     try {
-      const response = await buscarAnimal(busca);
+      const response = await filtrarAnimalDisponivel(busca);
       setAnimal(response);
     } catch (error) {
       alert("Error to request database.");

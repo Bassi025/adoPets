@@ -35,6 +35,23 @@ export async function buscarAnimal(nome) {
     })
 }
 
+// Filtrar um animal com status disponível pelo nome
+export async function filtrarAnimalDisponivel(nome) {
+    return new Promise((resolve) => {
+        db.transaction((transaction) => {
+            transaction.executeSql("SELECT animais.nome, animais.idade, animais.pelagem, animais.porte, animais.imagem, animais.id_instituicao FROM animais INNER JOIN adocoes ON adocoes.id_animal = animais.id WHERE adocoes.status = 0 AND nome LIKE ?;", [`${nome}`], (_, resultado) => {
+                var tamanho = resultado.rows.length;
+                if (tamanho > 0)
+                    resolve(resultado.rows.item(0));
+            },
+                (_, error) => {
+                    console.log(error);
+                }
+            )
+        })
+    })
+}
+
 // Buscar todos os animais
 export async function buscarAnimais() {
     return new Promise((resolve) => {
@@ -51,6 +68,26 @@ export async function buscarAnimais() {
     })
 }
 
+// Filtrar por todos animais com status disponível
+export async function filtrarAnimaisDisponiveis() {
+    return new Promise((resolve) => {
+        db.transaction((transaction) => {
+            transaction.executeSql("SELECT animais.nome, animais.idade, animais.pelagem, animais.porte, animais.imagem, animais.id_instituicao FROM animais INNER JOIN adocoes ON adocoes.id_animal = animais.id WHERE adocoes.status = 0;", [], (_, resultado) => {
+                var animais = [];
+                for (let i = 0; i < resultado.rows.length; ++i)
+                    animais.push(resultado.rows.item(i));
+
+                if (animais.length > 0)
+                    resolve(animais)
+            },
+                (_, error) => {
+                    console.log(error);
+                }
+            )
+        })
+    })
+}
+
 // Filtrar animais por instituição
 export async function filtrarAnimais(instituicao) {
     return new Promise((resolve) => {
@@ -63,6 +100,26 @@ export async function filtrarAnimais(instituicao) {
                 if (animais.length > 0)
                     resolve(animais)
             })
+        })
+    })
+}
+
+// Filtrar por todos animais com status disponível por instituição
+export async function filtrarAnimaisDisponiveisInst(instituicao) {
+    return new Promise((resolve) => {
+        db.transaction((transaction) => {
+            transaction.executeSql("SELECT animais.nome, animais.idade, animais.pelagem, animais.porte, animais.imagem, animais.id_instituicao FROM animais INNER JOIN adocoes ON adocoes.id_animal = animais.id WHERE animais.id_instituicao = ? AND adocoes.status = 0;", [instituicao], (_, resultado) => {
+                var animais = [];
+                for (let i = 0; i < resultado.rows.length; ++i)
+                    animais.push(resultado.rows.item(i));
+
+                if (animais.length > 0)
+                    resolve(animais)
+            },
+                (_, error) => {
+                    console.log(error);
+                }
+            )
         })
     })
 }

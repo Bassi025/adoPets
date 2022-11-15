@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,7 @@ import { buscarAnimal, filtrarAnimais } from '../servicos/Animais';
 import AnimalSearch from '../componentes/AnimalSearch';
 
 export default function BuscarAnimais() {
+  
   const [animal, setAnimal] = useState({});
   const [animais, setAnimais] = useState([{}]);
   const [busca, setBusca] = useState("");
@@ -26,7 +27,6 @@ export default function BuscarAnimais() {
   async function mostrarAnimais() {
     try {
       const response = await filtrarAnimais(instituicao.id);
-      console.log(response)
       setAnimais(response);
     } catch (error) {
       alert("Error to request database.");
@@ -34,9 +34,9 @@ export default function BuscarAnimais() {
     }
   }
 
-  useEffect(() => {
+  useEffect(useCallback(() => {
     mostrarAnimais();
-  }, [animal]);
+  }, [animal]));
 
   // Buscar animal pelo nome
   async function procurarAnimal() {

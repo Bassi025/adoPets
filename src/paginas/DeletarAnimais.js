@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 export default function DeletarAnimais() {
+    
     const [deletar, setDeletar] = useState("");
 
     return (

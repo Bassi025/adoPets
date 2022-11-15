@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import { filtrarAdocoes, filtrarAdocoesPorAnimal } from "../servicos/Adocao";
 import StatusSearch from "../componentes/StatusSearch";
 
 export default function SituacaoAnimais() {
+  
   const [adocaoAnimal, setAdocaoAnimal] = useState({});
   const [adocoes, setAdocoes] = useState([{}]);
   const [busca, setBusca] = useState("");
@@ -29,9 +30,9 @@ export default function SituacaoAnimais() {
     }
   }
 
-  useEffect(() => {
+  useEffect(useCallback(() => {
     mostrarAdocoes();
-  }, [adocoes, adocaoAnimal])
+  }, []))
 
   // Buscar animal pelo nome da instituição
   async function procurarAdocoesPorAnimal() {
@@ -123,9 +124,7 @@ const estilos = StyleSheet.create({
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 10,
-    border: 'none',
-    // borderColor: 'gray',
-    // borderWidth: StyleSheet.hairlineWidth,
+    border: 'none'
   },
   boxInput: {
     width: 277,
@@ -148,7 +147,6 @@ const estilos = StyleSheet.create({
   },
   boxDados: {
     width: "90%",
-    // height: "50%",
     backgroundColor: "#E8DFDD",
     marginHorizontal: 15,
     marginVertical: 40,
