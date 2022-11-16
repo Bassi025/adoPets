@@ -41,14 +41,3 @@ export async function logarUsuario(usuario) {
         })
     })
 }
-
-// Buscar todos os usuários
-export async function buscarUsuarios() {
-    return new Promise((resolve) => {
-        db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM usuarios", [], (_, resultado) => {
-                resolve(resultado.rows._array)
-            })
-        })
-    })
-}

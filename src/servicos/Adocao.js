@@ -22,22 +22,6 @@ export async function adicionarAdocao(adocao) {
     })
 }
 
-// Buscar todas as adoções
-export async function buscarAdocoes() {
-    return new Promise((resolve) => {
-        db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM adocoes", [], (_, resultado) => {
-                var adocoes = [];
-                for (let i = 0; i < resultado.rows.length; ++i)
-                    adocoes.push(resultado.rows.item(i));
-
-                if (adocoes.length > 0)
-                    resolve(adocoes)
-            })
-        })
-    })
-}
-
 // Filtrar animais e status da instituição logada
 export async function filtrarAdocoesInst(instituicao) {
     return new Promise((resolve) => {
@@ -78,19 +62,17 @@ export async function filtrarAdocoes() {
     })
 }
 
-// Filtrar animais adotados tabelas (Animal, Instituição e Adoção)
+// Filtrar animal disponível pelo nome da instituição
 export async function filtrarAdocoesPorAnimal(nome) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         db.transaction((transaction) => {
             transaction.executeSql("SELECT animais.nome AS nome_animal, instituicoes.nome AS nome_instituicao, adocoes.id AS id_adocao, adocoes.status, adocoes.dataAdocao FROM animais INNER JOIN instituicoes ON instituicoes.id = animais.id_instituicao INNER JOIN adocoes ON adocoes.id_animal = animais.id WHERE animais.nome LIKE ?;", [`${nome}`], (_, resultado) => {
                 var tamanho = resultado.rows.length;
                 if (tamanho > 0)
                     resolve(resultado.rows.item(0));
-            },
-                (_, error) => {
-                    console.log(error);
-                }
-            )
+                else
+                    reject("Animal não encontrado");
+            })
         })
     })
 }

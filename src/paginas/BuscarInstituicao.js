@@ -32,8 +32,7 @@ export default function BuscarInstituicao() {
       const response = await buscarInstituicao(busca);
       setIntituicao(response);
     } catch (error) {
-      alert("Error to request database.");
-      console.log(error);
+      alert("ERRO: " + error);
     }
   }
 

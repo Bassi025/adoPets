@@ -40,12 +40,16 @@ export default function BuscarAnimais() {
 
   // Buscar animal pelo nome
   async function procurarAnimal() {
+    if (!busca.trim()) {
+      alert("Informe o nome do animal");
+      return;
+    }
+
     try {
       const response = await buscarAnimal(busca);
       setAnimal(response);
     } catch (error) {
-      alert("Error to request database.");
-      console.log(error);
+      alert("ERRO: " + error);
     }
   }
 
@@ -71,6 +75,7 @@ export default function BuscarAnimais() {
             style={estilos.textInput}
             placeholder="Pitoco"
             onChangeText={setBusca}
+            required
           />
         </View>
         <TouchableOpacity style={estilos.botao} onPress={() => procurarAnimal()}>

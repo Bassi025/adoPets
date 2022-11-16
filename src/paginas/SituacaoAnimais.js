@@ -44,8 +44,7 @@ export default function SituacaoAnimais() {
       const response = await filtrarAdocoesPorAnimal(busca);
       setAdocaoAnimal(response);
     } catch (error) {
-      alert("Error to request database.");
-      console.log(error);
+      alert("ERRO: " + error);
     }
   }
 

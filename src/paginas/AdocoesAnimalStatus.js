@@ -153,7 +153,7 @@ const estilos = StyleSheet.create({
         width: 277,
         height: 45,
         marginHorizontal: 36,
-        backgroundColor: 'white',
+        backgroundColor: '#D3D3D3',
         borderRadius: 20,
         borderWidth: 3,
         borderColor: '#11E5BF'
@@ -162,7 +162,7 @@ const estilos = StyleSheet.create({
         height: 40,
         width: StyleSheet.inherit,
         margin: 10,
-        backgroundColor: 'white',
+        backgroundColor: '#D3D3D3',
         borderRadius: 10,
         border: 'none',
         // borderColor: 'gray',

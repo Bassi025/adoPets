@@ -32,8 +32,7 @@ export default function BuscarAnimaisUsuario() {
       const response = await filtrarAnimalDisponivel(busca);
       setAnimal(response);
     } catch (error) {
-      alert("Error to request database.");
-      console.log(error);
+      alert("ERRO: " + error);
     }
   }
 

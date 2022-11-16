@@ -26,7 +26,7 @@ function RadioButtons(props) {
                                         value={option.value}
                                         checked={field.value === option.value}
                                     />
-                                    <label htmlFor={option.value}>{option.status}</label>
+                                    <label style={styles.text} htmlFor={option.value}>{option.status}</label>
                                 </React.Fragment>
                             )
                         })
@@ -40,7 +40,7 @@ function RadioButtons(props) {
 
 const styles = StyleSheet.create({
     boxInput: {
-        width: 277,
+        width: 350,
         height: 45,
         marginHorizontal: 36,
         backgroundColor: 'white',
@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: StyleSheet.hairlineWidth,
         borderRadius: 10,
+    },
+    text: {
+        padding: 12,
     },
     boxField: {
         flex: 1,
