@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 const StatusSearch = ({ adocao }) => {
-    
+
     const navigation = useNavigation();
 
     function alterarStatus() {
@@ -44,9 +44,6 @@ const style = StyleSheet.create({
         resizeMode: 'cover'
     },
     info: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
         marginLeft: 8,
         marginVertical: 16,
         marginRight: 16,
@@ -70,7 +67,6 @@ const style = StyleSheet.create({
         shadowRadius: 2.62,
     },
     cardText: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'flex-end',

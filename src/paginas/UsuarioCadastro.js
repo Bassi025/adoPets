@@ -10,13 +10,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import { adicionarUsuario } from '../servicos/Usuario';
 
-import { Formik, Form } from 'formik';
+import { Formik, Field } from 'formik';
 import * as yup from 'yup';
 
-import FormikControl from '../componentes/FormikControl';
+import CustomInput from '../componentes/CustomInput';
 
 export default function UsuarioCadastro() {
-    
+
     const navigation = useNavigation();
 
     // Efetuar cadastro do usuário
@@ -58,51 +58,42 @@ export default function UsuarioCadastro() {
                     validationSchema={validationSchema}
                     onSubmit={(values, { resetForm }) => cadastrarUsuario(values, resetForm)}
                 >
-                    {({ handleSubmit }) => (
-                        <Form>
+                    {({ handleSubmit, isValid }) => (
+                        <>
                             <Text style={estilos.text}>Digite o seu nome:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='nome'
+                            <Field
+                                component={CustomInput}
+                                name="nome"
                             />
                             <Text style={estilos.text}>Digite o seu endereço:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='endereco'
+                            <Field
+                                component={CustomInput}
+                                name="endereco"
                             />
                             <Text style={estilos.text}>Digite o seu CPF:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='cpf'
+                            <Field
+                                component={CustomInput}
+                                name="cpf"
                             />
                             <Text style={estilos.text}>Digite a sua data de nascimento:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='dataNasc'
+                            <Field
+                                component={CustomInput}
+                                name="dataNasc"
                             />
                             <Text style={estilos.text}>Digite o seu telefone:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='telefone'
+                            <Field
+                                component={CustomInput}
+                                name="telefone"
                             />
 
                             <TouchableOpacity
                                 style={estilos.botao}
                                 onPress={handleSubmit}
+                                disabled={!isValid}
                             >
                                 <Text style={estilos.textButton}>CADASTRAR-SE</Text>
                             </TouchableOpacity>
-                        </Form>
+                        </>
                     )}
                 </Formik>
             </View>

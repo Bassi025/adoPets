@@ -10,8 +10,8 @@ const InstitutionSearch = ({ instituicao }) => {
         <TouchableOpacity style={style.card} onPress={() => navigation.navigate("BuscarAnimaisInstUsuario", { instituicao: instituicao })} >
             <View style={style.info}>
                 <Text style={style.textInfo}>Nome: {instituicao.nome}</Text>
-                <Text style={style.textInfo}>Endereço: {instituicao.cnpj}</Text>
-                <Text style={style.textInfo}>Cnpj: {instituicao.endereco}</Text>
+                <Text style={style.textInfo}>Cnpj: {instituicao.cnpj}</Text>
+                <Text style={style.textInfo}>Endereço: {instituicao.endereco}</Text>
             </View>
             <View style={style.cardText}>
                 <Text style={style.text}>Ver animais desta instituição</Text>
@@ -26,22 +26,7 @@ const style = StyleSheet.create({
         lineHeight: 22,
         fontWeight: "bold",
     },
-    containerImage: {
-        width: '100%',
-        height: 400,
-    },
-    image: {
-        marginHorizontal: 10,
-        marginTop: 10,
-        flex: 1,
-        width: undefined,
-        height: undefined,
-        resizeMode: 'cover'
-    },
     info: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
         marginLeft: 8,
         marginVertical: 16,
         marginRight: 16,
@@ -65,7 +50,6 @@ const style = StyleSheet.create({
         shadowRadius: 2.62,
     },
     cardText: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'flex-end',

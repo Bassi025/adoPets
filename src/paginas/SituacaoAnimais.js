@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
   FlatList
 } from "react-native";
 
@@ -36,11 +35,12 @@ export default function SituacaoAnimais() {
 
   useEffect(useCallback(() => {
     mostrarAdocoes();
-  }, []));
+  }, [adocaoAnimal]));
 
   // Buscar animal pelo nome da instituição
   async function procurarAdocoesPorAnimal() {
     try {
+      console.log(busca)
       const response = await filtrarAdocoesPorAnimal(busca);
       setAdocaoAnimal(response);
     } catch (error) {
@@ -63,7 +63,7 @@ export default function SituacaoAnimais() {
 
   return (
     <View style={estilos.Screen}>
-      <ScrollView style={estilos.boxPrincipal}>
+      <View style={estilos.boxPrincipal}>
         <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL PARA VER SUA SITUCAO!</Text>
         <View style={estilos.boxInput}>
           <TextInput
@@ -86,7 +86,7 @@ export default function SituacaoAnimais() {
             />
           }
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 }
@@ -122,8 +122,6 @@ const estilos = StyleSheet.create({
     color: "black"
   },
   textInput: {
-    height: 40,
-    width: StyleSheet.inherit,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -150,6 +148,7 @@ const estilos = StyleSheet.create({
   },
   boxDados: {
     width: "90%",
+    height: "40%",
     backgroundColor: "#E8DFDD",
     marginHorizontal: 15,
     marginVertical: 40,

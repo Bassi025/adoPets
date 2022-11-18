@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import dog from "../assets/img/dog5.png";
 
 const AnimalSearch = ({ animal }) => {
-
+    
     return (
         <View style={style.card}>
             <View style={style.containerImage}>
@@ -31,7 +31,7 @@ const style = StyleSheet.create({
     },
     containerImage: {
         width: '100%',
-        height: 400,
+        height: 200,
     },
     image: {
         marginHorizontal: 10,
@@ -42,12 +42,8 @@ const style = StyleSheet.create({
         resizeMode: 'cover'
     },
     info: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginLeft: 8,
-        marginVertical: 16,
-        marginRight: 16,
+        marginHorizontal: 10,
+        marginVertical: 10
     },
     card: {
         backgroundColor: '#F6F6F6',

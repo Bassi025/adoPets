@@ -30,6 +30,7 @@ function Telas() {
     <AuthProvider>
       <NavigationContainer>
         <Stack.Navigator>
+          {/* <Stack.Screen name="AnimalCadastro" component={AnimalCadastro} /> */}
           <Stack.Screen name="Menu" component={Menu} />
           <Stack.Screen name="Usuario" component={Usuario} />
           <Stack.Screen name="Instituicao" component={Instituicao} />

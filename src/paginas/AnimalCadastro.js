@@ -7,26 +7,30 @@ import {
   TouchableOpacity,
   ScrollView
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import * as ImagePicker from "expo-image-picker";
 
-import { Formik, Form } from 'formik';
+import { Formik, Field } from 'formik';
 import * as yup from 'yup';
 
 import { AuthContext } from "../contexto/auth";
 
-import FormikControl from '../componentes/FormikControl';
-
 import { adicionarAnimal } from '../servicos/Animais';
 import { buscarInstituicaoLogada } from '../servicos/Instituicao';
+import CustomInput from "../componentes/CustomInput";
+import CustomSelect from "../componentes/CustomSelect";
+import ImagePickerComponent from "../componentes/ImagePicker";
 
 
 export default function AnimalCadastro() {
-  
+
   const navigation = useNavigation();
 
   const { instituicao } = React.useContext(AuthContext);
 
   const [instituicoes, setIntituicoes] = useState([]);
+
+  const [instSelect, setInstSelected] = useState();
 
   const [image, setImage] = useState(null);
 
@@ -48,7 +52,7 @@ export default function AnimalCadastro() {
 
   // Efetuar cadastro do animal
   async function cadastrarAnimal(values, resetForm) {
-    const { nome, idade, pelagem, porte, instituicao } = values;
+    const { nome, idade, pelagem, porte } = values;
 
     try {
       const animal = {
@@ -57,7 +61,7 @@ export default function AnimalCadastro() {
         pelagem: pelagem,
         porte: porte,
         imagem: image,
-        id_instituicao: instituicao
+        id_instituicao: instSelect
       }
 
       const response = await adicionarAnimal(animal);
@@ -97,51 +101,71 @@ export default function AnimalCadastro() {
             pelagem: '',
             porte: '',
             imagem: undefined,
-            instituicao: undefined,
+            // instituicao: undefined,
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => cadastrarAnimal(values, resetForm)}
         >
-          {({ handleSubmit }) => (
-            <Form>
+          {({ handleSubmit, isValid }) => (
+            <>
               <Text style={estilos.text}>Qual o nome do pet?</Text>
-              <FormikControl
-                control='input'
-                type='text'
-                label=''
-                name='nome'
+              <Field
+                component={CustomInput}
+                name="nome"
               />
               <Text style={estilos.text}>Qual a idade aproximada?</Text>
-              <FormikControl
-                control='input'
-                type='text'
-                label=''
-                name='idade'
+              <Field
+                component={CustomInput}
+                name="idade"
               />
               <Text style={estilos.text}>Qual a pelagem?</Text>
-              <FormikControl
-                control='input'
-                type='text'
-                label=''
-                name='pelagem'
+              <Field
+                component={CustomInput}
+                name="pelagem"
               />
               <Text style={estilos.text}>Qual o porte do animal?</Text>
-              <FormikControl
-                control='input'
-                type='text'
-                label=''
-                name='porte'
+              <Field
+                component={CustomInput}
+                name="porte"
               />
               <Text style={estilos.text}>Qual o nome da instituição?</Text>
-              <FormikControl
-                control='select'
-                label=''
-                name='instituicao'
+              {/* <Field
+                component={CustomSelect}
+                name="instituicao"
                 options={instituicoes}
-              />
-              <FormikControl
-                control='image'
-                label=''
+              /> */}
+
+              <View style={estilos.boxInput}>
+                <Picker
+                  style={estilos.pickerSelect}
+                  selectedValue={instSelect}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setInstSelected(itemValue)
+                  }>
+                  {instituicoes.map(option => {
+                    return (
+                      <Picker.Item key={option.id} label={option.nome} value={option.id} />
+                    )
+                  })}
+                </Picker>
+              </View>
+
+              {/* <View style={estilos.boxInput}>
+                <Picker
+                  style={estilos.pickerSelect}
+                  onValueChange={(itemValue, itemIndex) => setFieldValue('instituicao', itemValue)}
+                  selectedValue={values.instituicao}
+                >
+                  {instituicoes.map(option => {
+                    return (
+                      <Picker.Item key={option.id} label={option.nome} value={option.id} />
+                    )
+                  })}
+                </Picker>
+              </View> */}
+
+              <Field
+                component={ImagePickerComponent}
                 name='imagem'
                 image={image}
                 fn={pickerImage}
@@ -150,10 +174,11 @@ export default function AnimalCadastro() {
               <TouchableOpacity
                 style={estilos.botao}
                 onPress={handleSubmit}
+                disabled={!isValid}
               >
                 <Text style={estilos.textButton}>CADASTRAR</Text>
               </TouchableOpacity>
-            </Form>
+            </>
           )}
         </Formik>
       </View>
@@ -182,9 +207,9 @@ const validationSchema = yup.object().shape({
   imagem: yup
     .mixed()
     .nullable(),
-  instituicao: yup
-    .number()
-    .required('A instituição é obrigatória')
+  // instituicao: yup
+  //   .number()
+  //   .required('A instituição é obrigatória')
 })
 
 const estilos = StyleSheet.create({
@@ -250,4 +275,7 @@ const estilos = StyleSheet.create({
     marginHorizontal: 37,
     marginTop: 10,
   },
+  pickerSelect: {
+    width: '100%',
+  }
 });

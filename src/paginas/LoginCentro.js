@@ -6,10 +6,10 @@ import { AuthContext } from "../contexto/auth";
 
 import { logarInstituicao } from "../servicos/Instituicao";
 
-import { Formik, Form } from 'formik';
+import { Formik, Field } from 'formik';
 import * as yup from 'yup';
 
-import FormikControl from "../componentes/FormikControl";
+import CustomInput from '../componentes/CustomInput';
 
 export default function CentroLogin() {
 
@@ -47,30 +47,28 @@ export default function CentroLogin() {
                     validationSchema={validationSchema}
                     onSubmit={values => logar(values)}
                 >
-                    {({ handleSubmit }) => (
-                        <Form>
+                    {({ handleSubmit, isValid }) => (
+                        <>
                             <Text style={estilos.text}>Digite o login da instituição:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='login'
+                            <Field
+                                component={CustomInput}
+                                name="login"
                             />
                             <Text style={estilos.text}>Digite a senha da instituição:</Text>
-                            <FormikControl
-                                control='input'
-                                type='password'
-                                label=''
-                                name='senha'
+                            <Field
+                                component={CustomInput}
+                                name="senha"
+                                secureTextEntry
                             />
 
                             <TouchableOpacity
                                 style={estilos.botao}
                                 onPress={handleSubmit}
+                                disabled={!isValid}
                             >
                                 <Text style={estilos.textButtonLogin}>LOGIN</Text>
                             </TouchableOpacity>
-                        </Form>
+                        </>
                     )}
                 </Formik>
 
