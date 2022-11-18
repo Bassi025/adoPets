@@ -1,26 +1,27 @@
-import React, {useState} from "react";
-import {Text, View, Alert, StyleSheet, TouchableOpacity, Image} from "react-native";
+import React from "react";
+import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-import pata from "../assets/img/pata.png"
+import pata from "../assets/img/pata.png";
 
-export default function Menu(){
-    const navigation = useNavigation();    
+export default function Menu() {
     
-    return(
-        <View style = {estilos.Screen}>
-            <View style = {estilos.boxPrincipal}>
-                <Text style = {estilos.textTitulo}>ADOPETS</Text>
-                <TouchableOpacity style={estilos.botaoCliente}  onPress={()=> navigation.navigate("Usuario")}>
-                    <Text style = {estilos.textButton}>CLIENTE</Text>
+    const navigation = useNavigation();
+
+    return (
+        <View style={estilos.Screen}>
+            <View style={estilos.boxPrincipal}>
+                <Text style={estilos.textTitulo}>ADOPETS</Text>
+                <TouchableOpacity style={estilos.botaoCliente} onPress={() => navigation.navigate("Usuario")}>
+                    <Text style={estilos.textButton}>CLIENTE</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={estilos.botaoInstuicao} onPress={()=> navigation.navigate("Instituicao")}>
-                    <Text style = {estilos.textButtonIntituicao}>INSTITUIÇÃO</Text>
+                <TouchableOpacity style={estilos.botaoInstuicao} onPress={() => navigation.navigate("Instituicao")}>
+                    <Text style={estilos.textButtonIntituicao}>INSTITUIÇÃO</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> navigation.navigate("TelaLoading")}>
-                    <Image source={pata} style = {estilos.imagen} />
+                <TouchableOpacity onPress={() => navigation.navigate("TelaLoading")}>
+                    <Image source={pata} style={estilos.imagen} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -28,7 +29,7 @@ export default function Menu(){
 }
 
 const estilos = StyleSheet.create({
-    Screen:{
+    Screen: {
         flex: 1,
         backgroundColor: '#F58055'
     },
@@ -53,7 +54,7 @@ const estilos = StyleSheet.create({
         height: 54,
         marginHorizontal: 44,
         marginTop: 35,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         borderRadius: 20,
         borderWidth: 3,
         justifyContent: 'center',
@@ -64,7 +65,7 @@ const estilos = StyleSheet.create({
         height: 54,
         marginHorizontal: 44,
         marginTop: 40,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         borderRadius: 20,
         borderWidth: 3,
         justifyContent: 'center',

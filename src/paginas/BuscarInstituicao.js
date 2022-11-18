@@ -1,43 +1,49 @@
-import { Link } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
 
-import { buscaInst } from '../servicos/Instituicao';
+import { buscarInstituicoes, buscarInstituicao } from '../servicos/Instituicao';
+
+import InstitutionSearch from '../componentes/InstitutionSearch';
 
 export default function BuscarInstituicao() {
-  const [busca, setBusca] = useState("");
-  const [instituicoes, setIntituicoes] = useState([{}]);
+  
   const [instituicao, setIntituicao] = useState({});
+  const [instituicoes, setIntituicoes] = useState([{}]);
+  const [busca, setBusca] = useState("");
 
+  // Buscar todas as instituições
   async function mostrarInstituicoes() {
     try {
-      const response = await buscaInst();
+      const response = await buscarInstituicoes();
       setIntituicoes(response);
-      console.log("Instituições: ", response);
     } catch (error) {
       alert("Error to request database.");
       console.log(error);
     }
   }
 
-  useEffect(() => {
+  useEffect(useCallback(() => {
     mostrarInstituicoes();
-  }, []);
+  }, [instituicao]));
+
+  // Buscar instituição pelo nome
+  async function procurarInstituicao() {
+    try {
+      const response = await buscarInstituicao(busca);
+      setIntituicao(response);
+    } catch (error) {
+      alert("ERRO: " + error);
+    }
+  }
 
   let listItemView = (item) => {
     return (
       <View>
-        {
-          JSON.stringify(item) !== "{}" ?
-            <View key={item.id} style={estilos.containerDados}>
-              <Text>Nome: {item.nome}</Text>
-              <Text>Cnpj: {item.cnpj}</Text>
-              <Text>Endereco: {item.endereco}</Text>
-              <Link to={{ screen: 'BuscarAnimais' }}>
-                Animais desta instituicao
-              </Link>
-            </View> 
-          : <View><Text>Não há instituições cadastradas.</Text></View>
+        {JSON.stringify(item) !== "{}" ?
+          <InstitutionSearch instituicao={item} /> :
+          <View>
+            <Text style={estilos.nome}>Não há instituições cadastradas.</Text>
+          </View>
         }
       </View>
     );
@@ -49,21 +55,24 @@ export default function BuscarInstituicao() {
         <Text style={estilos.textTitulo}>BUSQUE UMA INSTITUICAO!</Text>
         <View style={estilos.boxInput}>
           <TextInput
-            style={estilos.textImput}
+            style={estilos.textInput}
+            placeholder="Meirelles"
             onChangeText={setBusca}
-            value={busca}
           />
         </View>
-        <TouchableOpacity style={estilos.botao}>
+        <TouchableOpacity style={estilos.botao} onPress={() => procurarInstituicao()}>
           <Text style={estilos.textButton}>Pesquisar</Text>
         </TouchableOpacity>
         <View style={estilos.boxDados}>
+          {JSON.stringify(instituicao) !== "{}" ?
+            <InstitutionSearch instituicao={instituicao} /> :
             <FlatList
               showsVerticalScrollIndicator={false}
               data={instituicoes}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => listItemView(item)}
             />
+          }
         </View>
       </ScrollView>
     </View>
@@ -99,6 +108,16 @@ const estilos = StyleSheet.create({
     lineHeight: 50,
     fontFamily: "Cuprum-Bold",
     color: "black"
+  },
+  textInput: {
+    height: 40,
+    width: StyleSheet.inherit,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    border: 'none',
+    // borderColor: 'gray',
+    // borderWidth: StyleSheet.hairlineWidth,
   },
   boxInput: {
     width: 277,
@@ -144,5 +163,5 @@ const estilos = StyleSheet.create({
     marginHorizontal: 80,
     marginVertical: 10,
     fontFamily: 'Cuprum-Bold',
-  }
+  },
 });

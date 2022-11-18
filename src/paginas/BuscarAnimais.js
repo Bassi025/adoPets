@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -9,52 +9,59 @@ import {
   FlatList
 } from 'react-native';
 
-import { buscaAnimais, buscaAnimal } from '../servicos/Animais';
+import { AuthContext } from '../contexto/auth';
 
-export default function BuscarAnimais(props) {
+import { buscarAnimal, filtrarAnimais } from '../servicos/Animais';
 
-  console.log(props);
+import AnimalSearch from '../componentes/AnimalSearch';
+
+export default function BuscarAnimais() {
+  
+  const [animal, setAnimal] = useState({});
   const [animais, setAnimais] = useState([{}]);
   const [busca, setBusca] = useState("");
-  const [animal, setAnimal] = useState({});
 
+  const { instituicao } = React.useContext(AuthContext);
+
+  // Buscar animais da instituição
   async function mostrarAnimais() {
     try {
-      const response = await buscaAnimais();
+      const response = await filtrarAnimais(instituicao.id);
       setAnimais(response);
-      console.log("Animais: ", response);
     } catch (error) {
       alert("Error to request database.");
       console.log(error);
     }
   }
 
-  useEffect(() => {
+  useEffect(useCallback(() => {
     mostrarAnimais();
-  }, [animal]);
+  }, [animal]));
 
-  async function buscarAnimal() {
+  // Buscar animal pelo nome
+  async function procurarAnimal() {
+    if (!busca.trim()) {
+      alert("Informe o nome do animal");
+      return;
+    }
+
     try {
-      const response = await buscaAnimal(busca);
-      // console.log("Animal buscado: ", response);
+      const response = await buscarAnimal(busca);
       setAnimal(response);
     } catch (error) {
-      alert("Error to request database.");
-      console.log(error);
+      alert("ERRO: " + error);
     }
   }
 
   let listItemView = (item) => {
-    console.log(item);
     return (
-      <View>{
-        JSON.stringify(item) !== "{}" ?
-          <View key={item.id} style={estilos.containerDados}>
-            <Text>Nome: {item.nome}</Text>
-            <Text>Idade: {item.idade}</Text>
-            <Text>Pelagem: {item.pelagem}</Text>
-            <Text>Porte: {item.porte}</Text>
-          </View>:<View><Text>Não há animais cadastrados.</Text></View>}
+      <View>
+        {JSON.stringify(item) !== "{}" ?
+          <AnimalSearch animal={item} /> :
+          <View>
+            <Text style={estilos.nome}>Não há animais cadastrados.</Text>
+          </View>
+        }
       </View>
     );
   };
@@ -65,22 +72,18 @@ export default function BuscarAnimais(props) {
         <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL!</Text>
         <View style={estilos.boxInput}>
           <TextInput
-            style={estilos.textImput}
+            style={estilos.textInput}
+            placeholder="Pitoco"
             onChangeText={setBusca}
+            required
           />
         </View>
-        <TouchableOpacity style={estilos.botao} onPress={() => buscarAnimal()}>
+        <TouchableOpacity style={estilos.botao} onPress={() => procurarAnimal()}>
           <Text style={estilos.textButton}>Pesquisar</Text>
         </TouchableOpacity>
         <View style={estilos.boxDados}>
           {JSON.stringify(animal) !== "{}" ?
-            <View style={estilos.containerDados}>
-              <Text>Nome: {animal.nome}</Text>
-              <Text>Idade: {animal.idade}</Text>
-              <Text>Pelagem: {animal.pelagem}</Text>
-              <Text>Porte: {animal.porte}</Text>
-            </View>
-            :
+            <AnimalSearch animal={animal} /> :
             <FlatList
               showsVerticalScrollIndicator={false}
               data={animais}
@@ -124,6 +127,16 @@ const estilos = StyleSheet.create({
     fontFamily: "Cuprum-Bold",
     color: "black"
   },
+  textInput: {
+    height: 40,
+    width: StyleSheet.inherit,
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    border: 'none',
+    // borderColor: 'gray',
+    // borderWidth: StyleSheet.hairlineWidth,
+  },
   boxInput: {
     width: 277,
     height: 45,
@@ -145,15 +158,11 @@ const estilos = StyleSheet.create({
   },
   boxDados: {
     width: "90%",
-    height: "50%",
+    // height: "50%",
     backgroundColor: "#E8DFDD",
     marginHorizontal: 15,
     marginVertical: 40,
     borderRadius: 10
-  },
-  containerDados: {
-    flex: 1,
-    margin: 15,
   },
   botao: {
     width: 250,

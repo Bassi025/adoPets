@@ -1,62 +1,61 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Alert,
-  TouchableOpacity,
-  ScrollView
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    TouchableOpacity,
+    ScrollView
 } from "react-native";
 
-export default function SituacaoAnimais() {
-  const [busca, setBusca] = useState("");
+export default function DeletarAnimais() {
+    
+    const [deletar, setDeletar] = useState("");
 
-  return (
-    <View style={estilos.Screen}>
-      <ScrollView style={estilos.boxPrincipal}>
-        <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL PARA VER SUA SITUCAO!</Text>
-        <View style={estilos.boxInput}>
-            <TextInput 
+    return (
+        <View style={estilos.Screen}>
+            <ScrollView style={estilos.boxPrincipal}>
+                <Text style={estilos.textTitulo}>BUSQUE UM ANIMAL PARA DELETAR!</Text>
+                <View style={estilos.boxInput}>
+                    <TextInput
                         style={estilos.textImput}
-                        onChangeText={setBusca}
-                        value={busca}
+                        onChangeText={setDeletar}
                     />
+                </View>
+                <TouchableOpacity style={estilos.botao}>
+                    <Text style={estilos.textButton}>Delete</Text>
+                </TouchableOpacity>
+                <View style={estilos.boxDados}>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                    <Text>Teste Delete Animais</Text>
+                </View>
+            </ScrollView>
         </View>
-        <TouchableOpacity style={estilos.botao}>
-          <Text style={estilos.textButton}>Pesquisar</Text>
-        </TouchableOpacity>
-        <View style={estilos.boxDados}>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-            <Text>Teste Busca Animais</Text>
-        </View>
-      </ScrollView>
-    </View>
-  );
+    );
 }
 
 const estilos = StyleSheet.create({
     Screen: {
         flex: 1,
         backgroundColor: "#F58055"
-      },
-      textTitulo: {
+    },
+    textTitulo: {
         fontSize: 50,
         fontFamily: "CuteFont-Regular",
         marginHorizontal: 60,
         marginVertical: 10,
         color: "#F58055",
         textAlign: "center"
-      },
-      textSmall: {
+    },
+    textSmall: {
         fontSize: 10,
         fontFamily: "CuteFont-Regular",
         marginHorizontal: 100,
@@ -64,26 +63,26 @@ const estilos = StyleSheet.create({
         color: "#F58055",
         fontWeight: "bold",
         textAlign: "center"
-      },
-      text: {
+    },
+    text: {
         marginHorizontal: 20,
         marginVertical: 8,
         fontSize: 20,
         lineHeight: 50,
         fontFamily: "Cuprum-Bold",
         color: "black"
-      },
-      boxInput: {
+    },
+    boxInput: {
         width: 277,
         height: 45,
         marginHorizontal: 25,
         marginVertical: 8,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         borderRadius: 20,
         borderWidth: 3,
         borderColor: '#11E5BF',
-      },
-      boxPrincipal: {
+    },
+    boxPrincipal: {
         width: "90%",
         height: "90%",
         backgroundColor: "#F6F6F6",
@@ -91,31 +90,31 @@ const estilos = StyleSheet.create({
         marginHorizontal: 20,
         borderRadius: 6,
         elevation: 4
-      },
-      boxDados: {
+    },
+    boxDados: {
         width: "90%",
         height: "50%",
         backgroundColor: "#E8DFDD",
         marginHorizontal: 15,
         marginVertical: 40,
         borderRadius: 10
-      },
-      botao: {
+    },
+    botao: {
         width: 250,
         height: 54,
         marginHorizontal: 45,
         marginTop: 30,
-        backgroundColor:'#F58055',
+        backgroundColor: '#F58055',
         borderRadius: 20,
         borderWidth: 3,
         justifyContent: 'center',
         borderColor: 'black'
-      },
-      textButton: {
+    },
+    textButton: {
         fontColor: 'black',
         fontSize: 20,
-        marginHorizontal: 80,
+        marginHorizontal: 95,
         marginVertical: 10,
         fontFamily: 'Cuprum-Bold',
-      }
+    }
 });

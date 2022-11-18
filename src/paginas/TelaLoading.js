@@ -1,25 +1,24 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
 import dog from '../assets/img/dog4.jpg';
 
-export default function TelaLoading(){
-    const navigation = useNavigation();
+export default function TelaLoading() {
+
     return (
         <View style={estilos.Screen}>
             <Text style={estilos.textTitulo}>ADOPETS</Text>
             <Text style={estilos.textLoading}>CARREGANDO...</Text>
-            <Image style={estilos.imagen} source={dog}/>
+            <Image style={estilos.imagem} source={dog} />
         </View>
     );
 }
 
 const estilos = StyleSheet.create({
-    Screen:{
+    Screen: {
         flex: 1,
         backgroundColor: 'white',
-        
+
     },
     textTitulo: {
         fontSize: 80,
@@ -34,7 +33,7 @@ const estilos = StyleSheet.create({
         fontSize: 28,
         fontFamily: "Cuprum-Bold",
     },
-    imagen: {
+    imagem: {
         width: 210,
         height: 210,
         marginTop: 100,

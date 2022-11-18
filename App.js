@@ -6,18 +6,22 @@ import Telas from "./src/index";
 import { useFonts } from 'expo-font';
 import AppLoading from "expo-app-loading";
 
+import { deletarTabelas } from "./src/servicos/DeletarTabelas";
+import { criarDados } from "./src/servicos/CriarDados";
 import { instituicao } from "./src/servicos/Instituicao";
 import { usuario } from "./src/servicos/Usuario";
 import { animais } from "./src/servicos/Animais";
 import { adocao } from "./src/servicos/Adocao";
 
 export default function App() {
-  
-  useEffect(()=>{
+
+  useEffect(() => {
+    deletarTabelas(),
     instituicao(),
     usuario(),
     animais(),
-    adocao()
+    adocao(),
+    criarDados()
   }, [])
 
   const [fontsLoaded] = useFonts({
@@ -25,10 +29,10 @@ export default function App() {
     'Cuprum-Bold': require('./src/assets/fonts/Cuprum-Bold.ttf')
   });
   if (!fontsLoaded) {
-    return <AppLoading/>;
-  } 
+    return <AppLoading />;
+  }
 
   return (
-    <Telas/>
+    <Telas />
   );
 }
