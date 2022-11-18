@@ -1,5 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity, 
+  TextInput, 
+  FlatList 
+} from 'react-native';
 
 import { buscarInstituicoes, buscarInstituicao } from '../servicos/Instituicao';
 
@@ -22,9 +29,9 @@ export default function BuscarInstituicao() {
     }
   }
 
-  useEffect(useCallback(() => {
+  useEffect(() => {
     mostrarInstituicoes();
-  }, [instituicao]));
+  }, [instituicao]);
 
   // Buscar instituição pelo nome
   async function procurarInstituicao() {
@@ -51,7 +58,7 @@ export default function BuscarInstituicao() {
 
   return (
     <View style={estilos.Screen}>
-      <ScrollView style={estilos.boxPrincipal}>
+      <View style={estilos.boxPrincipal}>
         <Text style={estilos.textTitulo}>BUSQUE UMA INSTITUICAO!</Text>
         <View style={estilos.boxInput}>
           <TextInput
@@ -74,7 +81,7 @@ export default function BuscarInstituicao() {
             />
           }
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 }
@@ -110,14 +117,10 @@ const estilos = StyleSheet.create({
     color: "black"
   },
   textInput: {
-    height: 40,
-    width: StyleSheet.inherit,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 10,
     border: 'none',
-    // borderColor: 'gray',
-    // borderWidth: StyleSheet.hairlineWidth,
   },
   boxInput: {
     width: 277,

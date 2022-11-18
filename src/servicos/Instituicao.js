@@ -47,7 +47,7 @@ export async function logarInstituicao(instituicao) {
 export async function buscarInstituicao(nome) {
     return new Promise((resolve, reject) => {
         db.transaction((transaction) => {
-            transaction.executeSql("SELECT * FROM instituicoes where nome LIKE ?;", [`${nome}`], (_, resultado) => {
+            transaction.executeSql("SELECT * FROM instituicoes WHERE nome LIKE ?;", [`${nome}`], (_, resultado) => {
                 var tamanho = resultado.rows.length;
                 if (tamanho > 0)
                     resolve(resultado.rows.item(0));

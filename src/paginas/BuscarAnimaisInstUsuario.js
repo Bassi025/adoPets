@@ -43,7 +43,7 @@ export default function BuscarAnimaisInstUsuario({ route }) {
 
     return (
         <View style={estilos.Screen}>
-            <ScrollView style={estilos.boxPrincipal}>
+            <View style={estilos.boxPrincipal}>
                 <View style={estilos.boxTitulo}>
                     <View style={estilos.titulo}>
                         <Text style={estilos.textTitulo}>ADOPETS</Text>
@@ -58,7 +58,7 @@ export default function BuscarAnimaisInstUsuario({ route }) {
                         renderItem={({ item }) => listItemView(item)}
                     />
                 </View>
-            </ScrollView>
+            </View>
         </View>
     );
 }
@@ -97,6 +97,7 @@ const estilos = StyleSheet.create({
     },
     boxDados: {
         width: "90%",
+        height: "73%",
         backgroundColor: "#E8DFDD",
         marginHorizontal: 15,
         marginVertical: 40,

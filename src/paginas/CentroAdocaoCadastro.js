@@ -9,13 +9,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import { adicionarInstituicao } from '../servicos/Instituicao';
 
-import { Formik, Form } from 'formik';
+import { Formik, Field } from 'formik';
 import * as yup from 'yup';
 
-import FormikControl from '../componentes/FormikControl';
+import CustomInput from '../componentes/CustomInput';
 
 export default function CentroAdocaoCadastro() {
-    
+
     const navigation = useNavigation();
 
     // Efetuar cadastro da instituição
@@ -53,37 +53,32 @@ export default function CentroAdocaoCadastro() {
                     validationSchema={validationSchema}
                     onSubmit={(values, { resetForm }) => cadastrarInstituicao(values, resetForm)}
                 >
-                    {({ handleSubmit }) => (
-                        <Form>
+                    {({ handleSubmit, isValid }) => (
+                        <>
                             <Text style={estilos.text}>Digite o nome da instituição:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='nome'
+                            <Field
+                                component={CustomInput}
+                                name="nome"
                             />
                             <Text style={estilos.text}>Digite o endereço da instituição:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='endereco'
+                            <Field
+                                component={CustomInput}
+                                name="endereco"
                             />
                             <Text style={estilos.text}>Digite o CNPJ da instituição:</Text>
-                            <FormikControl
-                                control='input'
-                                type='text'
-                                label=''
-                                name='cnpj'
+                            <Field
+                                component={CustomInput}
+                                name="cnpj"
                             />
 
                             <TouchableOpacity
                                 style={estilos.botao}
                                 onPress={handleSubmit}
+                                disabled={!isValid}
                             >
                                 <Text style={estilos.textButton}>CADASTRAR-SE</Text>
                             </TouchableOpacity>
-                        </Form>
+                        </>
                     )}
                 </Formik>
             </View>

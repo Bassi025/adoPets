@@ -22,9 +22,9 @@ export default function BuscarAnimaisUsuario() {
     }
   }
 
-  useEffect(useCallback(() => {
+  useEffect(() => {
     mostrarAnimais();
-  }, [animal]));
+  }, [animal]);
 
   // Buscar animal pelo nome
   async function procurarAnimal() {
@@ -51,7 +51,7 @@ export default function BuscarAnimaisUsuario() {
 
   return (
     <View style={estilos.Screen}>
-      <ScrollView style={estilos.boxPrincipal}>
+      <View style={estilos.boxPrincipal}>
         <Text style={estilos.textTitulo}>BUSQUE SEU ANIMAL PREFERIDO!</Text>
         <View style={estilos.boxInput}>
           <TextInput
@@ -74,7 +74,7 @@ export default function BuscarAnimaisUsuario() {
             />
           }
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 }
@@ -110,14 +110,10 @@ const estilos = StyleSheet.create({
     color: "black"
   },
   textInput: {
-    height: 40,
-    width: StyleSheet.inherit,
     margin: 10,
     backgroundColor: 'white',
     borderRadius: 10,
-    border: 'none',
-    // borderColor: 'gray',
-    // borderWidth: StyleSheet.hairlineWidth,
+    border: 'none'
   },
   boxInput: {
     width: 277,
@@ -140,7 +136,7 @@ const estilos = StyleSheet.create({
   },
   boxDados: {
     width: "90%",
-    // height: "50%",
+    height: "46%",
     backgroundColor: "#E8DFDD",
     marginHorizontal: 15,
     marginVertical: 40,

@@ -1,29 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import RadioForm from 'react-native-simple-radio-button';
 
-import { Form, Formik } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { atualizarAdocoesStatus } from '../servicos/Adocao';
 
-import FormikControl from '../componentes/FormikControl';
-
 import pata from "../assets/img/pata.png";
 
 export default function AdocoesAnimalStatus({ route }) {
-    
+
     const navigation = useNavigation();
 
-    const { id_adocao, nome_animal, nome_instituicao, dataAdocao } = route.params?.adocoes;
+    const { id_adocao, nome_animal, nome_instituicao, dataAdocao, status } = route.params?.adocoes;
+
+    const [statusAlt, setStatusAlt] = useState(0);
 
     // Alterar status do animal
-    async function alterarStatusAnimal(values) {
-        const { status } = values;
-
+    async function alterarStatusAnimal() {
         try {
             const statusAlterado = {
-                status: parseInt(status),
+                status: statusAlt,
                 id: id_adocao
             }
             const response = await atualizarAdocoesStatus(statusAlterado);
@@ -37,8 +36,8 @@ export default function AdocoesAnimalStatus({ route }) {
     }
 
     const statusOptions = [
-        { status: 'Disponível para adoção', value: 0 },
-        { status: 'Adotado', value: 1 }
+        { label: 'Disponível para adoção', value: 0 },
+        { label: 'Adotado', value: 1 }
     ]
 
     return (
@@ -52,13 +51,13 @@ export default function AdocoesAnimalStatus({ route }) {
                 </View>
                 <Formik
                     initialValues={{
-                        status: undefined
+                        // status: undefined
                     }}
-                    validationSchema={validationSchema}
-                    onSubmit={values => alterarStatusAnimal(values)}
+                    // validationSchema={validationSchema}
+                    onSubmit={values => alterarStatusAnimal()}
                 >
                     {({ handleSubmit }) => (
-                        <Form>
+                        <>
                             <Text style={estilos.text}>Nome do animal:</Text>
                             <View style={estilos.boxInput}>
                                 <TextInput
@@ -78,12 +77,20 @@ export default function AdocoesAnimalStatus({ route }) {
                             </View>
 
                             <Text style={estilos.text}>Status:</Text>
-                            <FormikControl
-                                control='radio'
-                                label=''
-                                name='status'
-                                options={statusOptions}
-                            />
+
+                            <View style={estilos.boxInputRadio}>
+                                <View style={estilos.boxField}>
+                                    <RadioForm
+                                        radio_props={statusOptions}
+                                        initial={status}
+                                        formHorizontal={true}
+                                        labelHorizontal={true}
+                                        buttonColor={'#F58055'}
+                                        labelStyle={{fontSize: 12, color: 'black', marginHorizontal: 3}}
+                                        onPress={(value) => { setStatusAlt(value) }}
+                                    />
+                                </View>
+                            </View>
 
                             <Text style={estilos.text}>Data Adoção:</Text>
                             <View style={estilos.boxInput}>
@@ -100,7 +107,7 @@ export default function AdocoesAnimalStatus({ route }) {
                             >
                                 <Text style={estilos.textButton}>EDITAR</Text>
                             </TouchableOpacity>
-                        </Form>
+                        </>
                     )}
                 </Formik>
             </ScrollView>
@@ -129,7 +136,6 @@ const estilos = StyleSheet.create({
         elevation: 4
     },
     boxTitulo: {
-        // height: "26%",
         backgroundColor: "#F58055",
     },
     titulo: {
@@ -158,15 +164,28 @@ const estilos = StyleSheet.create({
         borderWidth: 3,
         borderColor: '#11E5BF'
     },
+    boxInputRadio: {
+        width: 277,
+        alignItems: 'center',
+        height: 45,
+        marginHorizontal: 36,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        borderWidth: 3,
+        borderColor: '#11E5BF'
+    },
+    boxField: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     textInput: {
-        height: 40,
-        width: StyleSheet.inherit,
-        margin: 10,
+        padding: 10,
         backgroundColor: '#D3D3D3',
-        borderRadius: 10,
-        border: 'none',
-        // borderColor: 'gray',
-        // borderWidth: StyleSheet.hairlineWidth,
+        color: 'black',
+        borderRadius: 20,
+        border: 'none'
     },
     imgTitulo: {
         width: 100,
@@ -176,7 +195,6 @@ const estilos = StyleSheet.create({
     },
     boxDados: {
         width: "90%",
-        // height: "50%",
         backgroundColor: "#E8DFDD",
         marginHorizontal: 15,
         marginVertical: 40,
