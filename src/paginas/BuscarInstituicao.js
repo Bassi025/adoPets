@@ -76,7 +76,7 @@ export default function BuscarInstituicao() {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={instituicoes}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(_, index) => index.toString()}
               renderItem={({ item }) => listItemView(item)}
             />
           }

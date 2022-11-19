@@ -27,15 +27,6 @@ export default function DeletarAnimais() {
                 </TouchableOpacity>
                 <View style={estilos.boxDados}>
                     <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
-                    <Text>Teste Delete Animais</Text>
                 </View>
             </ScrollView>
         </View>

@@ -17,8 +17,8 @@ import { AuthContext } from "../contexto/auth";
 
 import { adicionarAnimal } from '../servicos/Animais';
 import { buscarInstituicaoLogada } from '../servicos/Instituicao';
+
 import CustomInput from "../componentes/CustomInput";
-import CustomSelect from "../componentes/CustomSelect";
 import ImagePickerComponent from "../componentes/ImagePicker";
 
 
@@ -100,8 +100,7 @@ export default function AnimalCadastro() {
             idade: '',
             pelagem: '',
             porte: '',
-            imagem: undefined,
-            // instituicao: undefined,
+            imagem: undefined
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => cadastrarAnimal(values, resetForm)}
@@ -129,11 +128,6 @@ export default function AnimalCadastro() {
                 name="porte"
               />
               <Text style={estilos.text}>Qual o nome da instituição?</Text>
-              {/* <Field
-                component={CustomSelect}
-                name="instituicao"
-                options={instituicoes}
-              /> */}
 
               <View style={estilos.boxInput}>
                 <Picker
@@ -149,20 +143,6 @@ export default function AnimalCadastro() {
                   })}
                 </Picker>
               </View>
-
-              {/* <View style={estilos.boxInput}>
-                <Picker
-                  style={estilos.pickerSelect}
-                  onValueChange={(itemValue, itemIndex) => setFieldValue('instituicao', itemValue)}
-                  selectedValue={values.instituicao}
-                >
-                  {instituicoes.map(option => {
-                    return (
-                      <Picker.Item key={option.id} label={option.nome} value={option.id} />
-                    )
-                  })}
-                </Picker>
-              </View> */}
 
               <Field
                 component={ImagePickerComponent}
@@ -206,10 +186,7 @@ const validationSchema = yup.object().shape({
     .required('O porte é obrigatório'),
   imagem: yup
     .mixed()
-    .nullable(),
-  // instituicao: yup
-  //   .number()
-  //   .required('A instituição é obrigatória')
+    .nullable()
 })
 
 const estilos = StyleSheet.create({
