@@ -69,7 +69,7 @@ export default function BuscarAnimaisUsuario() {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={animais}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(_, index) => index.toString()}
               renderItem={({ item }) => listItemView(item)}
             />
           }

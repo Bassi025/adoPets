@@ -81,7 +81,7 @@ export default function SituacaoAnimais() {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={adocoes}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(_, index) => index.toString()}
               renderItem={({ item }) => listItemView(item)}
             />
           }

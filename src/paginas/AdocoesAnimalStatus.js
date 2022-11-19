@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import RadioForm from 'react-native-simple-radio-button';
 
 import { Formik } from 'formik';
-import * as yup from 'yup';
 
 import { atualizarAdocoesStatus } from '../servicos/Adocao';
 
@@ -50,11 +50,7 @@ export default function AdocoesAnimalStatus({ route }) {
                     </View>
                 </View>
                 <Formik
-                    initialValues={{
-                        // status: undefined
-                    }}
-                    // validationSchema={validationSchema}
-                    onSubmit={values => alterarStatusAnimal()}
+                    onSubmit={alterarStatusAnimal()}
                 >
                     {({ handleSubmit }) => (
                         <>
@@ -114,12 +110,6 @@ export default function AdocoesAnimalStatus({ route }) {
         </View>
     );
 }
-
-const validationSchema = yup.object().shape({
-    status: yup
-        .number()
-        .required('O status é obrigatório')
-})
 
 const estilos = StyleSheet.create({
     Screen: {
